@@ -4,10 +4,7 @@
  <!-- ENLACES -->
 <?php include(HTML_DIR . 'overall/topnav.php'); ?>
 
- <!-- LOGIN - REGISTRO - REUPERAR PASS-->
-<?php include(HTML_DIR . 'public/login.html'); ?>
-<?php include(HTML_DIR . 'public/reg.html'); ?>
-<?php include(HTML_DIR . 'public/lostpass.html'); ?>
+
 
 
 

@@ -6,6 +6,12 @@ require('core/core.php');// DISPONIBLE CONTROLADORES Y OTROS EN TODAS LAS PAGINA
 if (  si esta definida la vista "$_GET['view']"  ){}
 else{si NO ir a una pag.}
  */
+
+
+
+
+
+
 if(isset($_GET['view'])) {
  #si la view esta definida ir a la VISTA
 // convertidor de mayusculas a minusculasa (para evitar errores en servidor)

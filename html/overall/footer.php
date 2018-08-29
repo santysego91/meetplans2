@@ -25,6 +25,10 @@
         <div class="mbr-footer mbr-footer--wysiwyg row">
             <div class="col-sm-12">
                 <p class="mbr-footer__copyright"><?php echo APP_COPY ?> <a class="mbr-footer__link text-gray" href="#/">Terminos de Uso</a>  | <a class="mbr-footer__link text-gray" href="#/">Política de Privacidad</a></p>
+
+
+<?php  echo 'FUNCIÓN Encrypt: ' . Encrypt('123456'); //funcion Encrypt.php ?></br>
+<?php  echo 'Que nos dice la variable $_SESSION: ' . $_SESSION['app_id']; //funcion Encrypt.php ?>
             </div>
         </div>
     </div>
