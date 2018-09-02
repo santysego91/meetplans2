@@ -19,6 +19,11 @@ if($_POST){
       require('core/bin/ajax/goLogin.php');
       break;
 
+      case 'registro':
+        require('core/bin/ajax/goReg.php');
+        break;
+
+
     default:
       header('location: index.php');
       break;

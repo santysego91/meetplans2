@@ -22,7 +22,23 @@ require('vendor/autoload.php');  //carga automatiamente todas las librerias que 
 require('core/models/class.Conexion.php');
 require('core/bin/functions/Encrypt.php');#Archivo encriptador de pass
 require('core/bin/functions/Users.php');#Archivo que trae los datos de los usuarios
+require('core/bin/functions/EmailTemplate.php');#Archivo que valida el registro
 
 #VARIABLES
 $users = Users();//variable que utilizaremos para obtener datos de los usuarios. Definida en Users.php
+
+#CONSTANTES DE PHPMAILER
+
+define('PHPMAILER_HOST', 'p3plcpnl0173.prod.phx3.secureserver.net');
+define('PHPMAILER_SMTP_AUTH', 'true');
+define('PHPMAILER_USER', 'public@orend.com');
+define('PHPMAILER_PASS', 'Prinick2016');
+define('PHPMAILER_SMTP_SECURE', 'tls');
+define('PHPMAILER_PORT', '565');
+// detalles del correo
+define('PHPMAILER_TITULO_EMAIL', 'MiWeb.com');
+define('PHPMAILER_SUBJECT', 'Activacion de tu cuenta');
+
+
+
 ?>

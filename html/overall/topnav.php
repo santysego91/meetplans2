@@ -40,7 +40,7 @@ if(!isset($_SESSION['app_id'])){//si la sesion no esta definda
 // si NO esta logeado mostramos LOGIN - REISTRO - RECUPERAR PASS
 if(!isset($_SESSION['app_id'])){
   include(HTML_DIR . 'public/login.html');
-  include(HTML_DIR . 'public/recuperar.html');
-  include(HTML_DIR . 'public/registro.html');
+  include(HTML_DIR . 'public/lostpass.html');
+  include(HTML_DIR . 'public/reg.html');
 }
  ?>
