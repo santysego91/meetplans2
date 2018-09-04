@@ -29,15 +29,16 @@ $users = Users();//variable que utilizaremos para obtener datos de los usuarios.
 
 #CONSTANTES DE PHPMAILER
 
-define('PHPMAILER_HOST', 'p3plcpnl0173.prod.phx3.secureserver.net');
-define('PHPMAILER_SMTP_AUTH', 'true');
-define('PHPMAILER_USER', 'public@orend.com');
-define('PHPMAILER_PASS', 'Prinick2016');
-define('PHPMAILER_SMTP_SECURE', 'tls');
-define('PHPMAILER_PORT', '565');
-// detalles del correo
-define('PHPMAILER_TITULO_EMAIL', 'MiWeb.com');
-define('PHPMAILER_SUBJECT', 'Activacion de tu cuenta');
+define('PHPMAILER_HOST', 'smtp.gmail.com');                // Host del SMTP. (Se puede usar el de google smtp.gmail.com)
+define('PHPMAILER_SMTP_AUTH', 'true');                     // Enable SMTP authentication
+define('PHPMAILER_USER', '');           // Usuario del Host SMTP (Puede ser tu correo gmail) para poder usarlo permitir otras apps en https://myaccount.google.com/lesssecureapps
+define('PHPMAILER_PASS', '');                     // Pass del Host SMTP
+define('PHPMAILER_SMTP_SECURE', 'ssl');                    // Enable TLS encryption, `ssl` also accepted
+define('PHPMAILER_PORT', '465');                           //Puerto TCP (gmail usa el 465 con ssl. De lo contrario 587)
+// Detalles del correo registro
+define('PHPMAILER_SUBJECT', 'MiWeb.com - ACTIVACIÓN DE CUENTA');             // El 'Subject' que aparecera de titulo
+
+
 
 
 

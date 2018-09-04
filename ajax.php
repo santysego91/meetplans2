@@ -23,6 +23,10 @@ if($_POST){
         require('core/bin/ajax/goReg.php');
         break;
 
+        case 'logout':
+          require('core/controllers/logout.Controller.php');
+          break;
+
 
     default:
       header('location: index.php');

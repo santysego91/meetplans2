@@ -13,19 +13,20 @@ $sql = $db->query("SELECT user FROM users WHERE user='$user' OR email='$email' L
 if($db->rows($sql) ==0){
   // no devuelve nada (no existe usuario ni el email)
 
-
+// BASE CONFIG PHPMAILER
 $keyreg = md5(time()); //sera el tiempo encriptado la llave de registro
 $link = APP_URL . '?view=activar&key=' . $keyreg;
 
 
 
-// BASE CONFIG PHPMAILER
-//video 6       30.00 seg
-
-$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+$mail = new PHPMailer\PHPMailer\PHPMailer(true);          // Passing `true` enables exceptions
 try {
     //Server settings
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+    $mail->CharSet = "UTF-8";
+    $mail->Encoding = "quoted-printable";
+
+
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = PHPMAILER_HOST;                         // Specify main and backup SMTP servers
     $mail->SMTPAuth = PHPMAILER_SMTP_AUTH;                // Enable SMTP authentication
@@ -35,17 +36,33 @@ try {
     $mail->Port = PHPMAILER_PORT;                         // TCP port to connect to
 
     //Recipients
-    $mail->setFrom(PHPMAILER_USER, PHPMAILER_TITULO_EMAIL);         // quien manda el correo?
-    $mail->addAddress($email, $user);                               // a quien le llega
+    $mail->setFrom(PHPMAILER_USER, PHPMAILER_TITULO_EMAIL);
+    $mail->addAddress($email, $user);     // Add a recipient
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = PHPMAILER_SUBJECT;
-    $mail->Body    = EmailTemplate($user,$link);          // declarados mas arriba y los recibe la funcion EmailTemplate.php
-    $mail->AltBody = 'Hola ' . $user .' para activar tu cuenta accede al enlace: ' . $link;
+    $mail->Body    = '<table width="80%" border="0" cellpadding="1">
+        <tr>
+          <th align="center" valign="middle" scope="col" bgcolor="#0099CC">Bienvenido a la comunidad <b>' . $user .' </b></th>
+             </tr>
+             <tr>
+               <th align="center" valign="middle" scope="row" bgcolor="#CCCCCC"><p>Nos ayudará  asegurar su cuenta en ' . APP_TITLE .' verificando su dirección de correo electrónico.</p> <p><b><a href="'. $link . '">ACTIVAR MI CUENTA</a></b></p>
+             <p>Esto le permite acceder a todas las funciones de un usuario registrado.</p>
+             </br></th>
+           </tr>
+           <tr>
+             <th align="center" valign="middle" scope="row"><p>' . APP_COPY . ' (goReg.php)</p></th>
+         </tr>
+       </table>' ;
+
+
+
+    $mail->AltBody = 'Hola ' . $user .'!, para activar tu cuenta accede al enlace: ' . $link;
 
     $mail->send();
-    echo 'Message has been sent';
+
+
     // si no hay error instertamos usuario
       $db->query("INSERT INTO users (user, pass, email, keyreg) VALUES ('$user','$pass','$email','$keyreg');");
       $sql_2= $db->query("SELECT MAX(id) AS id FROM users;");
@@ -53,17 +70,18 @@ try {
       $db-> liberar($sql_2);
       $HTML = 1; // para que en reg.js acceda a connect.responseText == 1   y nos redireccione
 
+echo 'Message has been sent';
+
 
 } catch (Exception $e) {
-    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-    // si no se envio correctamente
-    $HTML = '<div class="alert alert-dismissible alert-danger">
-    <button type="button" class="close" data-dismiss="alert">X</button>
-    <strong>Oh!</strong>'. $mail->ErrorInfo .'. (goReg.php)
+  echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+  // si no se envio correctamente
+  $HTML = '<div class="alert alert-dismissible alert-danger">
+  <button type="button" class="close" data-dismiss="alert">X</button>
+  <strong>Oh!</strong>'. $mail->ErrorInfo .'. (goReg.php)
   </div>';
-
-
 }
+
 
 // FIN BASE CONFIG PHPMAILER
 
