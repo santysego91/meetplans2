@@ -9,7 +9,7 @@ define('DB_NAME', 'nombre_bd');
 
 #CONSTANTES DE LA APP
 define('HTML_DIR', 'html/');
-define('APP_URL', 'http://localhost/meetplans/');
+define('APP_URL', 'http://localhost/meetplans2/');
 define('BOOTSTRAP_CSS_DIR', 'views/app/css/bootstrap/');
 define('BOOTSTRAP_JS_DIR', 'views/app/js/bootstrap/');
 define('APP_TITLE', 'Mi Web.com');
