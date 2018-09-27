@@ -1,6 +1,6 @@
 <div class="modal fade" id="Lostpass" role="dialog">
    <div class="modal-dialog">
-
+<div id="_AJAX_LOSTPASS_"></div><!-- div que manda el mensaje de login.js-->
      <div class="modal-content">
        <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -8,11 +8,11 @@
        </div>
        <div class="modal-body">
          <div role="form">
-           <div class="form-group">
+           <div class="form-group" onkeypress="return runScriptLostPass(event)"><!-- div detectar tecla enter-->
              <label for="usrname"><span class="glyphicon glyphicon-enveloper"></span> Email</label>
-             <input type="email" class="form-control" id="email_lostpass" placeholder="Enter email">
+             <input type="email" class="form-control" id="box_email_lostpass" placeholder="Enter email">
            </div>
-           <button type="button" class="btn btn-default btn-success btn-block" id="recuperar_passs"><span class="glyphicon glyphicon-off"></span> Recuperar</button>
+           <button type="button" class="btn btn-default btn-success btn-block" onclick="goLostPass()"><span class="glyphicon glyphicon-off"></span> Recuperar</button>
          </div>
        </div>
        <div class="modal-footer">
@@ -21,3 +21,5 @@
      </div>
    </div>
  </div>
+ <!-- Script importatante -->
+<script src="views/app/js/lostpass.js"></script>

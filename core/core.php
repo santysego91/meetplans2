@@ -9,7 +9,7 @@ define('DB_NAME', 'nombre_bd');
 
 #CONSTANTES DE LA APP
 define('HTML_DIR', 'html/');
-define('APP_URL', 'http://localhost/meetplans2/');
+define('APP_URL', 'http://localhost/meetplans/');
 define('BOOTSTRAP_CSS_DIR', 'views/app/css/bootstrap/');
 define('BOOTSTRAP_JS_DIR', 'views/app/js/bootstrap/');
 define('APP_TITLE', 'Mi Web.com');
@@ -23,6 +23,7 @@ require('core/models/class.Conexion.php');
 require('core/bin/functions/Encrypt.php');#Archivo encriptador de pass
 require('core/bin/functions/Users.php');#Archivo que trae los datos de los usuarios
 require('core/bin/functions/EmailTemplate.php');#Archivo que valida el registro
+require('core/bin/functions/LostPassTemplate.php');#Archivo que valida el registro
 
 #VARIABLES
 $users = Users();//variable que utilizaremos para obtener datos de los usuarios. Definida en Users.php

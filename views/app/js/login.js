@@ -66,6 +66,7 @@ if(connect.readyState == 4 && connect.status == 200){ //Ax
 tenemos que usar el mismo cifrado para enviar datos por cabecera  (vamos a pasar una URL codificada)*/
  connect.setRequestHeader('Content-Type','application/x-www-form-urlencoded');/* sin esta linea no funcionan*/
  connect.send(form);
+
 }//Az fin
 
 

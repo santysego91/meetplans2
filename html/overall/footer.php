@@ -28,15 +28,7 @@
 
 </br></br>
 
-<?php echo '<b>FUNCIÓN Encrypt: </b>' . Encrypt('123456'); //funcion Encrypt.php ?> </br>
-<?php echo '<b>Que nos dice la variable $_SESSION: </b>' . $_SESSION['app_id']; //funcion Encrypt.php ?>
-</br></br>
-<?php echo '<b><u>DATOS DE USUARIO LOGUEADO: </u></b>'; ?></br>
-<?php echo 'ID: '       . $users[$_SESSION['app_id']]['id'];//traer nombre id ?></br>
-<?php echo 'Nombre: '   . $users[$_SESSION['app_id']]['user']; //traer nombre usuario ?></br>
-<?php echo 'Email: '    . $users[$_SESSION['app_id']]['email'];//traer nombre email ?></br>
-<?php echo 'Pass: '     . $users[$_SESSION['app_id']]['pass'];//traer nombre id ?></br>
-<?php echo 'Permisos: ' . $users[$_SESSION['app_id']]['permiso'];//traer nombre id ?></br>
+
 
 
 

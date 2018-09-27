@@ -21,7 +21,7 @@ if(!isset($_SESSION['app_id'])){//si la sesion no esta definda
 }else {//boton de acceso a perfil si el usuario esta logeado
   echo '<a class="mbr-buttons__link btn text-white" href="?view=perfil&id='.$_SESSION['app_id'].'">'. strtoupper($users[$_SESSION['app_id']]['user']) .'</a></li><li class="mbr-navbar__item">
         <a class="mbr-buttons__link btn text-white" href="?view=cuenta">Cuenta</a></li><li class="mbr-navbar__item">
-                <a class="mbr-buttons__link btn text-white" href="#">DESCONECTARSE</a></li><li class="mbr-navbar__item">
+                <a class="mbr-buttons__link btn text-white" href="?view=logout">DESCONECTARSE</a></li><li class="mbr-navbar__item">
   ';
 
 }

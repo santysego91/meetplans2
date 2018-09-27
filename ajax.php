@@ -23,9 +23,13 @@ if($_POST){
         require('core/bin/ajax/goReg.php');
         break;
 
-        case 'logout':
-          require('core/controllers/logout.Controller.php');
-          break;
+      case 'lostpass':
+          require('core/bin/ajax/goLostPass.php');
+       break;
+
+      case 'forum':
+        require('core/controllers/forumController.php');
+        break;
 
 
     default:
