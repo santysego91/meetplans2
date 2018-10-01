@@ -24,9 +24,11 @@ require('core/bin/functions/Encrypt.php');#Archivo encriptador de pass
 require('core/bin/functions/Users.php');#Archivo que trae los datos de los usuarios
 require('core/bin/functions/EmailTemplate.php');#Archivo que valida el registro
 require('core/bin/functions/LostPassTemplate.php');#Archivo que valida el registro
+require('core/bin/functions/Categorias.php');#Archivo que obtiene toda la info de categorias de foros
 
 #VARIABLES
-$users = Users();//variable que utilizaremos para obtener datos de los usuarios. Definida en Users.php
+$_users = Users();//variable que utilizaremos para obtener datos de los usuarios. Definida en function/Users.php
+$_categorias = Categorias();//variable que utilizaremos para obtener datos de las categorias. Definida en function/Categorias.php
 
 #CONSTANTES DE PHPMAILER
 

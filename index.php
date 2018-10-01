@@ -1,4 +1,8 @@
 <?php
+//PENDIENTES
+/* En class.Categorias.php borrar tambien los temas asosiados a la categoria
+*/
+
 //index.php se encarga de llamar a los controladores
 require('core/core.php');// DISPONIBLE CONTROLADORES Y OTROS EN TODAS LAS PAGINAS
 

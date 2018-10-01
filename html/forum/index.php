@@ -44,6 +44,25 @@ if(isset($_GET['error'])){// definido en activarController.php
 
 
 
+<div class="row container">
+
+<?php
+if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){//la funcion permiso esta definida en $_users.php  - PARA GESTIONAR HAY QUE SER ADMIN por eso mayor o igual a 2 para poder visualizar los botones
+  echo'
+  <!-- botones admin foro -->
+
+ <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=cuenta">GESTIONAR FOROS</a>
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias">GESTIONAR CATEGORÍAS</a>
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias&mode=add">CREAR CATEGORIA</a>
+</div>
+
+  <!-- botones admin foro -->
+  ';
+}
+?>
+
+
  <!-- breadcrumb -->
  <ol class="breadcrumb">
    <li class="breadcrumb-item"><a href="#">Home</a></li>

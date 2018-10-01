@@ -30,8 +30,10 @@ if($_POST){
       case 'forum':
         require('core/controllers/forumController.php');
         break;
-
-
+        case 'categorias':
+          require('core/controllers/categoriasController.php');
+          break;
+          
     default:
       header('location: index.php');
       break;
