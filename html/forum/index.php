@@ -52,7 +52,7 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
   <!-- botones admin foro -->
 
  <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
-     <a class="mbr-buttons__btn btn btn-danger" href="?view=cuenta">GESTIONAR FOROS</a>
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=adm_foros">GESTIONAR FOROS</a>
      <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias">GESTIONAR CATEGORÍAS</a>
      <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias&mode=add">CREAR CATEGORIA</a>
 </div>

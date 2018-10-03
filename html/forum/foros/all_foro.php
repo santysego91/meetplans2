@@ -2,7 +2,7 @@
 
  <!-- *****************************************************************-->
 
- <!-- DISEÑO ALL_CATEGORIAS-->
+ <!-- DISEÑO ALL_FOROS-->
 
  <!-- *****************************************************************-->
 
@@ -19,8 +19,14 @@
  <section class="mbr-section mbr-after-navbar" id="content1-10">
      <div class="mbr-section__container container mbr-section__container--isolated">
  <!-- CONTENIDO -->
+ <?php
+ if(isset($_GET['success'])){// definido en activarController.php
+   echo '<div class="alert alert-dismissible alert-success">
+ <strong>Completado!</strong> El foro <b><u>' . $_foros[$_GET['id']]['nombre'] . ' </b></u> fue eliminado. (all_foro.php)
+ </div>';
+ }
 
-
+  ?>
 
 <div class="row container">
 
@@ -30,8 +36,8 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
   <!-- botones admin foro -->
 
  <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
-     <a class="mbr-buttons__btn btn btn-danger" href="?view=adm_foros">GESTIONAR FOROS</a>
-     <a class="mbr-buttons__btn btn btn-danger active" href="?view=categorias">GESTIONAR CATEGORÍAS</a>
+     <a class="mbr-buttons__btn btn btn-danger active" href="?view=adm_foros">GESTIONAR FOROS</a>
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias">GESTIONAR CATEGORÍAS</a>
      <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias&mode=add">CREAR CATEGORIA</a>
 </div>
 
@@ -43,7 +49,7 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
 
  <!-- breadcrumb -->
  <ol class="breadcrumb">
-   <li class="breadcrumb-item"><a href="?view=categorias">Categorias</a></li>
+   <li class="breadcrumb-item"><a href="?view=foros">Foros</a></li>
  </ol>
  <!-- fin breadcrumb -->
 
@@ -63,7 +69,7 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
 
   <table width="100%" border="0" cellspacing="2" cellpadding="2">
      <tr>
-       <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" ><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">GESTIÓN DE CATEGORÍAS</div></th>
+       <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" ><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">GESTIÓN DE FOROS</div></th>
      </tr>
    </table>
 
@@ -71,10 +77,10 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
 
 
    <?php
+   // en adm_categorias.php tengo esto $sql = $db->query("SELECT * FROM categorias;");
 
-
-   // crear la tabla si hay categorias
-if(false != $_categorias){
+   // crear la tabla
+if(false != $_foros){
 
   $HTML= '
   <div class="row">
@@ -83,25 +89,36 @@ if(false != $_categorias){
   <table class="table">
     <thead>
       <tr>
-        <th style="width: 10%">ID</th>
-        <th style="width: 60%">Nombre de categoria</th>
-        <th style="width: 30%">Acciones</th>
+        <th style="width: 5%;  text-align: center;">ID</th>
+        <th style="width: 30%">Foro</th>
+        <th style="width: 5%;  text-align: center;">Mensajes</th>
+        <th style="width: 5%;  text-align: center;">Temas</th>
+        <th style="width: 30%">Categoría</th>
+        <th style="width: 5%;  text-align: center;">Estado</th>
+        <th style="width: 20%;  text-align: center;">Acciones</th>
       </tr>
     </thead>
    <tbody>';
 
 
-   foreach($_categorias as $id_categoria => $categoria_array){
+   foreach ($_foros as $id_foro => $content_array){
+
+     $estado = $_foros[$id_foro]['estado'] == 1 ? 'ON' : 'OFF';
+
      $HTML .= '<tr>
-       <td>'.$_categorias[$id_categoria]['id'].'</td>
-       <td>'.$_categorias[$id_categoria]['nombre'].'</td>
+       <td style="font-style: italic;	color: #000; text-align: center;"><strong>'.$_foros[$id_foro]['id'].'</strong></td>
+       <td>'.$_foros[$id_foro]['nombre'].'</td>
+       <td style="color: #000; text-align: center;">'.$_foros[$id_foro]['cantidad_mensajes'].'</td>
+       <td style="color: #000; text-align: center;">'.$_foros[$id_foro]['cantidad_temas'].'</td>
+       <td>'.$_categorias[$_foros[$id_foro]['id_categoria']]['nombre'].'</td>
+       <td style="color: #000; text-align: center;">'. $estado .'</td>
       <td>
         <div class="btn-group">
           <a class="btn btn-primary">Acciones</a>
           <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="?view=categorias&mode=edit&id='.$_categorias[$id_categoria]['id'].'">Editar</a></li>
-            <li><a onClick="DeleteItem(\'¿Esta seguro de eliminar esta categoria?\', \'?view=categorias&mode=delete&id='.$_categorias[$id_categoria]['id'].'\')">Eliminar</a></li>
+            <li><a href="?view=adm_foros&mode=edit&id='.$_foros[$id_foro]['id'].'">Editar</a></li>
+            <li><a onClick="DeleteItem(\'¿Esta seguro de eliminar este foro?\', \'?view=adm_foros&mode=delete&id='.$_foros[$id_foro]['id'].'\')">Eliminar</a></li>
           </ul>
       </div>
     </td>
@@ -118,12 +135,20 @@ if(false != $_categorias){
      //mensaje de que no hay resultados
      $HTML='<div class="alert alert-dismissible alert-info">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>UPS! No hay ninguna categoria (all_categorias.php)</strong></a>
+  <strong>UPS! No hay ningun foro (all_foro.php)</strong></a>
 </div>';
   }
 
 echo $HTML;
    ?>
+
+
+
+
+
+
+
+
 
 
  <!-- pag -->

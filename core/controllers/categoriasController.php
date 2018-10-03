@@ -46,18 +46,9 @@ break;
 //*********************************
 default:
 //*********************************
-$db = new Conexion();
-$sql = $db->query("SELECT * FROM categorias;");
-
-if($db->rows($sql) > 0){
-  //mayor que 0
 include(HTML_DIR . 'forum/categorias/all_categoria.php');
-$db->liberar($sql);
-$db->close();
 break;
-}else{
-  header('location: ?view=index');
-}
+
 
 }}
 ?>
