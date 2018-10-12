@@ -123,10 +123,10 @@ if ($prepare_sql->num_rows > 0) {
     <td width="43%" rowspan="2"><div align="left">
     <a href="foros/'.UrlAmigable($id_del_foro,$_foros[$id_del_foro]['nombre']).'"><strong>'.$_foros[$id_del_foro]['nombre'].'</strong></a><br />
     '.$_foros[$id_del_foro]['descripcion'].'</div></td>
-    <td><div align="center">'.$_foros[$id_del_foro]['cantidad_temas'].' </div></td>
-    <td><div align="center">'.$_foros[$id_del_foro]['cantidad_mensajes'].' </div></td>
-    <td width="32%" rowspan="2"><div align="center"><a href="#" title="Welcome">Welcome</a>       <br />
-    by <a href="#">Gramziu</a> 24 Feb 2015, 21:50</div></td>
+    <td><div align="center">'.number_format($_foros[$id_del_foro]['cantidad_temas'],0,',','.').' </div></td>
+    <td><div align="center">'.number_format($_foros[$id_del_foro]['cantidad_mensajes'],0,',','.').' </div></td>
+    <td width="32%" rowspan="2"><div align="center"><a href="#" title="IR AL PERFIL">Usuario</a><br />
+    11/10/18 - 21:50</div></td>
     </tr>
     <tr>
     <td width="8%"><p align="center">Temas</p>    </td>

@@ -63,7 +63,9 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
 
   <table width="100%" border="0" cellspacing="2" cellpadding="2">
      <tr>
-       <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" ><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">GESTIÓN DE CATEGORÍAS</div></th>
+       <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
+         <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">
+           GESTIÓN DE CATEGORÍAS</div></th>
      </tr>
    </table>
 

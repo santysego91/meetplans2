@@ -72,7 +72,9 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
 
   <table width="100%" border="0" cellspacing="2" cellpadding="2">
      <tr>
-       <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" ><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">GESTIÓN DE FOROS</div></th>
+       <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
+         <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">
+           GESTIÓN DE FOROS</div></th>
      </tr>
    </table>
 
@@ -111,8 +113,8 @@ if(false != $_foros){
      $HTML .= '<tr>
        <td style="font-style: italic;	color: #000; text-align: center;"><strong>'.$_foros[$id_foro]['id'].'</strong></td>
        <td>'.$_foros[$id_foro]['nombre'].'</td>
-       <td style="color: #000; text-align: center;">'.$_foros[$id_foro]['cantidad_mensajes'].'</td>
-       <td style="color: #000; text-align: center;">'.$_foros[$id_foro]['cantidad_temas'].'</td>
+       <td style="color: #000; text-align: center;">'.number_format($_foros[$id_foro]['cantidad_mensajes'],0,',','.').'</td>
+       <td style="color: #000; text-align: center;">'.number_format($_foros[$id_foro]['cantidad_temas'],0,',','.').'</td>
        <td>'.$_categorias[$_foros[$id_foro]['id_categoria']]['nombre'].'</td>
        <td style="color: #000; text-align: center;">'. $estado .'</td>
       <td>
