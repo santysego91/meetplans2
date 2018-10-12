@@ -1,6 +1,8 @@
 <?php
 //PENDIENTES
-/* En class.Categorias.php borrar tambien los temas asosiados a la categoria
+/*
+1- En class.Categorias.php borrar tambien los temas asosiados a la categoria
+2- En class.ConfigForos.php borrar los temas asosiados al foro
 */
 
 //index.php se encarga de llamar a los controladores

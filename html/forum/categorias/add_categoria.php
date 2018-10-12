@@ -41,7 +41,7 @@
    <!-- botones admin foro -->
 
   <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
-      <a class="mbr-buttons__btn btn btn-danger" href="?view=adm_foros">GESTIONAR FOROS</a>
+      <a class="mbr-buttons__btn btn btn-danger" href="?view=configforos">GESTIONAR FOROS</a>
       <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias">GESTIONAR CATEGORÍAS</a>
       <a class="mbr-buttons__btn btn btn-danger active" href="?view=categorias&mode=add">CREAR CATEGORIA</a>
  </div>
@@ -51,26 +51,9 @@
  }
  ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- breadcrumb -->
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="?view=categorias">Categorias</a></li>
+    <li class="breadcrumb-item"><a href="?view=categorias"><i class="fa fa-tags"></i>Categorias</a></li>
   </ol>
   <!-- fin breadcrumb -->
 

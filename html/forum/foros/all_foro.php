@@ -22,7 +22,7 @@
  <?php
  if(isset($_GET['success'])){// definido en activarController.php
    echo '<div class="alert alert-dismissible alert-success">
- <strong>Completado!</strong> El foro <b><u>' . $_foros[$_GET['id']]['nombre'] . ' </b></u> fue eliminado. (all_foro.php)
+ <strong>Completado!</strong> El foro fue eliminado correctamente. (all_foro.php)
  </div>';
  }
 
@@ -36,9 +36,12 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
   <!-- botones admin foro -->
 
  <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
-     <a class="mbr-buttons__btn btn btn-danger active" href="?view=adm_foros">GESTIONAR FOROS</a>
+     <a class="mbr-buttons__btn btn btn-danger active" href="?view=configforos">GESTIONAR FOROS</a>
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=configforos&mode=add">CREAR FORO</a>
+
      <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias">GESTIONAR CATEGORÍAS</a>
-     <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias&mode=add">CREAR CATEGORIA</a>
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias&mode=add">CREAR CATEGORIAS</a>
+
 </div>
 
   <!-- botones admin foro -->
@@ -117,8 +120,8 @@ if(false != $_foros){
           <a class="btn btn-primary">Acciones</a>
           <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="?view=adm_foros&mode=edit&id='.$_foros[$id_foro]['id'].'">Editar</a></li>
-            <li><a onClick="DeleteItem(\'¿Esta seguro de eliminar este foro?\', \'?view=adm_foros&mode=delete&id='.$_foros[$id_foro]['id'].'\')">Eliminar</a></li>
+            <li><a href="?view=configforos&mode=edit&id='.$_foros[$id_foro]['id'].'">Editar</a></li>
+            <li><a onClick="DeleteItem(\'¿Esta seguro de eliminar este foro?\', \'?view=configforos&mode=delete&id='.$_foros[$id_foro]['id'].'\')">Eliminar</a></li>
           </ul>
       </div>
     </td>

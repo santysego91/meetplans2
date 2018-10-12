@@ -14,6 +14,7 @@ define('BOOTSTRAP_CSS_DIR', 'views/app/css/bootstrap/');
 define('BOOTSTRAP_JS_DIR', 'views/app/js/bootstrap/');
 define('APP_TITLE', 'Mi Web.com');
 define('APP_COPY', 'Copyright  &copy; ' . ' ' . date('Y',time()) . ' ' .'Miweb.com');
+define('IC_TOPIC_FORUM_DIR', 'views/app/images/forums/icons/boardicons/');
 
 
 

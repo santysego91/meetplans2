@@ -33,7 +33,10 @@ if($_POST){
         case 'categorias':
           require('core/controllers/categoriasController.php');
           break;
-          
+          case 'configforos':
+            require('core/controllers/configforosController.php');
+            break;
+
     default:
       header('location: index.php');
       break;

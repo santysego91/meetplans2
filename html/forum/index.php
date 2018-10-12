@@ -52,7 +52,7 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
   <!-- botones admin foro -->
 
  <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
-     <a class="mbr-buttons__btn btn btn-danger" href="?view=adm_foros">GESTIONAR FOROS</a>
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=configforos">GESTIONAR FOROS</a>
      <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias">GESTIONAR CATEGORÍAS</a>
      <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias&mode=add">CREAR CATEGORIA</a>
 </div>
@@ -65,98 +65,135 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
 
  <!-- breadcrumb -->
  <ol class="breadcrumb">
-   <li class="breadcrumb-item"><a href="#">Home</a></li>
-   <li class="breadcrumb-item"><a href="#">Library</a></li>
-   <li class="breadcrumb-item active">Data</li>
+   <li class="breadcrumb-item"><a href="#"><?php echo APP_TITLE; ?></a></li>
  </ol>
  <!-- fin breadcrumb -->
 
 
-<?php  for($c =1; $c <4; $c++) {  ?>
+<?php
 
- <table width="100%" border="0" cellspacing="2" cellpadding="2">
-   <tr>
-     <th colspan="5" scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" ><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">TITULO CATEGORIA</div></th>
-   </tr>
-   <tr>
-     <th colspan="5" scope="col"><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;"></div></th>
-   </tr>
-<?php  for($x =1; $x <5; $x++) {  ?>
+if(false !=$_categorias){
+  // SI HAY CATEGORIAS  (para ver cual es la forma mas optima ver como comprueba en video creasion de foros 2/2- parte 13  56:40)
+# Para recorrer solo una vez los foros y determinar la cantidad de categorias de forma que use menos recursos
 
- <!-- pag -->
+//$prepare_sql  = $db->prepare("SELECT id FROM foros WHERE id_categoria = ? LIMIT 1;");# Por cada repeticion obtenemos 1. El simbolo de ? es donde entra el parametro $id_categoria1 de abajo
+//$prepare_sql->bind_param('i',$id_categoria1); #sentencia sql preparada que se ejecutara solo 1 vez
 
+$prepare_sql  = $db->prepare("SELECT id FROM foros WHERE id_categoria = ? ;");
+$prepare_sql->bind_param('i',$id_categoria);
+foreach ($_categorias as $id_categoria => $array_categoria) {
+  // encabezado $_categorias
+
+$prepare_sql->execute();
+$prepare_sql->bind_result($id_del_foro);
+
+echo '
+<table width="100%" border="0" cellspacing="2" cellpadding="2">
+  <tr>
+    <th colspan="5" scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
+      <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">'.$_categorias[$id_categoria]['nombre'].'</div></th>
+  </tr>
+  <tr>
+    <th colspan="5" scope="col"><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;"></div></th>
+  </tr>
+';
+
+
+while ($prepare_sql->fetch()) {
+
+  if($_foros[$id_del_foro]['estado'] == 1){
+    $extension = 'off.gif';
+  }else {
+    $extension = 'lock.gif';
+  }
+  // muestra esto la cantidad de veces que encuentre un foro aqui
+  echo '
+
+  <!-- pag -->
+
+  <tr>
+  <th width="9%" rowspan="2" scope="row"><div align="center"><img src="'.IC_TOPIC_FORUM_DIR.$extension.'" /></div></th>
+  <td width="43%" rowspan="2"><div align="left">
+  <a href="http://localhost/meetplans2/#"><strong>'.$_foros[$id_del_foro]['nombre'].'</strong></a><br />
+  '.$_foros[$id_del_foro]['descripcion'].'</div></td>
+  <td><div align="center">'.$_foros[$id_del_foro]['cantidad_temas'].' </div></td>
+  <td><div align="center">'.$_foros[$id_del_foro]['cantidad_mensajes'].' </div></td>
+  <td width="32%" rowspan="2"><div align="center"><a href="#" title="Welcome">Welcome</a>       <br />
+  by <a href="#">Gramziu</a> 24 Feb 2015, 21:50</div></td>
+  </tr>
+  <tr>
+  <td width="8%"><p align="center">Temas</p>    </td>
+  <td width="8%"><div align="center">Mensajes</div></td>
+  </tr>
+
+
+  <tr>
+  <th colspan="5" scope="col" cellspacing="0" cellpadding="0"><div align="left"><hr style="color: #0056b2;" /></div></th>
+  </tr>
+
+
+  ';
+}
+
+
+
+
+
+  echo '
+  <!-- pag -->
+  </table>
+  ';
+
+
+}//final foreach
+
+$prepare_sql->close();
+}else {
+  // si no hay categorias
+
+  echo '
+  <table width="100%" border="0" cellspacing="2" cellpadding="2">
+    <tr>
+      <th  scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
+        <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;"><center>No existe ninguna categoria.</center></div>
+      </th>
+    </tr>
+    <tr>
+      <th scope="col"><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;"></div></th>
+    </tr>
+  <!-- pag -->
+  <tr>
+  <th width="90%" scope="row"><div align="center">Para crear una categoria ve a <a class="mbr-buttons__btn btn btn-danger" href="?view=categorias&mode=add">CREAR CATEGORIA</a> </div></th>
+
+ </tr>
  <tr>
- <th width="9%" rowspan="2" scope="row"><div align="center"><img src="views/app/images/forums/icons/boardicons/off.gif" /></div></th>
- <td width="43%" rowspan="2"><div align="left"><a href="http://localhost/meetplans2/#"><strong>TITULO DE FORO</strong></a><br />
- Descripción corta del foro</div></td>
- <td><div align="center">40 </div></td>
- <td><div align="center">788 </div></td>
- <td width="32%" rowspan="2"><div align="center"><a href="#" title="Welcome">Welcome</a>       <br />
- by <a href="#">Gramziu</a> 24 Feb 2015, 21:50</div></td>
-</tr>
-<tr>
- <td width="8%"><p align="center">Temas</p>    </td>
- <td width="8%"><div align="center">Mensajes</div></td>
-</tr>
-
-
-<tr>
- <th colspan="5" scope="col" cellspacing="0" cellpadding="0"><div align="left"><hr style="color: #0056b2;" /></div></th>
-</tr>
- <?php  }  ?>
-<!-- pag -->
+  <th scope="col" cellspacing="0" cellpadding="0"><div align="left"><hr style="color: #0056b2;" /></div></th>
+ </tr>
+ <!-- pag -->
+  </table>
+  ';
+}
 
 
 
- </table>
- <?php  }  ?>
-
-
-
- <!-- pag
- <div class="row categorias_con_foros">
-	<div class="col-sm-12">
-				<div class="row titulo_categoria">TITULO CATEGORIA</div>
-
-<?php  for($x =1; $x <5; $x++) {  ?>
-
-<div class="row foros">
-
-
-
-  <div class="col-md-1" style="height:50px; line-height: 37px;">
-   <img src="views/app/images/forums/icons/boardicons/off.gif" />
-  </div>
-
-
-   <div class="col-md7 puntitos" style="padding-left: 0px;">
-  <a href="#"> TITULO DE FORO</a><br />
-  Descripción corta del foro
-  </div>
-
-
-  <div class="col-md-2 left_border" style="text-aling: center;font-weight:bold;">
-  40 Temas <br />
-  788 Mensajes
-  </div>
-
-
-  <div class="col-md-2 left_border puntitos" style="line-height: 37px;">
-  <a href="#">Ultimo mensaje, Txt Largo</a>
-  </div>
-
-  </div>
-
-	<?php  }  ?>
+ ?>
 
 
 
 
-  </div>
-    </div>
-    </div>
 
--->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  <!-- pag -->
