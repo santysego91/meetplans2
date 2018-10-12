@@ -85,8 +85,11 @@ foreach ($_categorias as $id_categoria => $array_categoria) {
   // encabezado $_categorias
 
 $prepare_sql->execute();
-$prepare_sql->bind_result($id_del_foro);
 
+//una vez obtenemos los resultados lo guardamos en un cache para verificar si hay temas. si no lo hay enviaremos un mensaje de que no hay temas
+$prepare_sql->store_result();// este cache no afecta en absoluto al rendimiento
+
+//Inicio tabla de diseño foros
 echo '
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
   <tr>
@@ -98,51 +101,65 @@ echo '
   </tr>
 ';
 
+// para ver si me trae datos puedo hacer echo en $prepare_sql->num_rows
+if ($prepare_sql->num_rows > 0) {
+  // EXISTEN FOROS
+  $prepare_sql->bind_result($id_del_foro);
 
-while ($prepare_sql->fetch()) {
+  while ($prepare_sql->fetch()) {
 
-  if($_foros[$id_del_foro]['estado'] == 1){
-    $extension = 'off.gif';
-  }else {
-    $extension = 'lock.gif';
+    if($_foros[$id_del_foro]['estado'] == 1){
+      $extension = 'off.gif';
+    }else {
+      $extension = 'lock.gif';
+    }
+    // muestra esto la cantidad de veces que encuentre un foro aqui
+    echo '
+
+    <!-- pag -->
+
+    <tr>
+    <th width="9%" rowspan="2" scope="row"><div align="center"><img src="'.IC_TOPIC_FORUM_DIR.$extension.'" /></div></th>
+    <td width="43%" rowspan="2"><div align="left">
+    <a href="foros/'.UrlAmigable($id_del_foro,$_foros[$id_del_foro]['nombre']).'"><strong>'.$_foros[$id_del_foro]['nombre'].'</strong></a><br />
+    '.$_foros[$id_del_foro]['descripcion'].'</div></td>
+    <td><div align="center">'.$_foros[$id_del_foro]['cantidad_temas'].' </div></td>
+    <td><div align="center">'.$_foros[$id_del_foro]['cantidad_mensajes'].' </div></td>
+    <td width="32%" rowspan="2"><div align="center"><a href="#" title="Welcome">Welcome</a>       <br />
+    by <a href="#">Gramziu</a> 24 Feb 2015, 21:50</div></td>
+    </tr>
+    <tr>
+    <td width="8%"><p align="center">Temas</p>    </td>
+    <td width="8%"><div align="center">Mensajes</div></td>
+    </tr>
+
+    <tr>
+    <th colspan="5" scope="col" cellspacing="0" cellpadding="0"><div align="left"><hr style="color: #0056b2;" /></div></th>
+    </tr>
+    ';
   }
-  // muestra esto la cantidad de veces que encuentre un foro aqui
+
+} else {
+  // NO HAY FOROS
+
   echo '
 
   <!-- pag -->
-
   <tr>
-  <th width="9%" rowspan="2" scope="row"><div align="center"><img src="'.IC_TOPIC_FORUM_DIR.$extension.'" /></div></th>
-  <td width="43%" rowspan="2"><div align="left">
-  <a href="http://localhost/meetplans2/#"><strong>'.$_foros[$id_del_foro]['nombre'].'</strong></a><br />
-  '.$_foros[$id_del_foro]['descripcion'].'</div></td>
-  <td><div align="center">'.$_foros[$id_del_foro]['cantidad_temas'].' </div></td>
-  <td><div align="center">'.$_foros[$id_del_foro]['cantidad_mensajes'].' </div></td>
-  <td width="32%" rowspan="2"><div align="center"><a href="#" title="Welcome">Welcome</a>       <br />
-  by <a href="#">Gramziu</a> 24 Feb 2015, 21:50</div></td>
-  </tr>
-  <tr>
-  <td width="8%"><p align="center">Temas</p>    </td>
-  <td width="8%"><div align="center">Mensajes</div></td>
-  </tr>
+  <th width="90%" scope="row"><div align="center">Para crear un foro ve a <a class="mbr-buttons__btn btn btn-danger" href="?view=configforos&mode=add">CREAR FORO</a> </div></th>
 
-
-  <tr>
-  <th colspan="5" scope="col" cellspacing="0" cellpadding="0"><div align="left"><hr style="color: #0056b2;" /></div></th>
-  </tr>
-
-
+ </tr>
+ <tr>
+  <th scope="col" cellspacing="0" cellpadding="0"><div align="left"><hr style="color: #0056b2;" /></div></th>
+ </tr>
+ <!-- pag -->
   ';
 }
-
-
-
-
-
-  echo '
-  <!-- pag -->
-  </table>
-  ';
+//final tabla de diseño foros
+echo '
+<!-- pag -->
+</table>
+';
 
 
 }//final foreach

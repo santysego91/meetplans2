@@ -27,7 +27,24 @@ global $_categorias;
       }else{
         $this->nombre = $this->db->real_escape_string($_POST['nombre']);
         $this->descripcion = $this->db->real_escape_string($_POST['descripcion']);
-
+        //Seguridad para no poder hacer injects con scripts
+        $this->descripcion = str_replace(
+            array(
+              '<script>','</script>','<!DOCTYPE','DOCTYPE','<web-app>','</web-app>',
+              '<script src=','<script type=',
+              'window.alert','console.log','getConnection','try {',
+              'src=','type=','encoding=','version=',
+              'window.','console.','java.sql.PreparedStatement',
+              'java.sql','sql','java',
+              'mysql','select','*','from','WHERE','FROM','MYSQL','SELEC','SQL',
+              'executeQuery','setString',
+              'echo','<','>','<?php','?>','<?xml','xml',
+              '/*','//','*/','@',
+              '"http://','request.getParameter','request.','.close()'
+            ),
+            '',
+          $this->descripcion
+        );
 
         if($_POST['estado'] == 1){
           $this->estado = 1;

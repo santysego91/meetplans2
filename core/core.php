@@ -27,6 +27,7 @@ require('core/bin/functions/EmailTemplate.php');#Archivo que valida el registro
 require('core/bin/functions/LostPassTemplate.php');#Archivo que valida el registro
 require('core/bin/functions/Categorias.php');#Archivo que obtiene toda la info de categorias de foros
 require('core/bin/functions/Foros.php');#Archivo que obtiene toda la info de los foros
+require('core/bin/functions/UrlAmigable.php');#Archivo que obtiene toda la info de los foros
 
 #VARIABLES
 $_users = Users();//variable que utilizaremos para obtener datos de los usuarios. Definida en function/Users.php
