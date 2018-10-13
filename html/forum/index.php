@@ -1,6 +1,6 @@
 <?php include(HTML_DIR . 'overall/header.php'); ?>
 <body>
-<section class="engine"><a rel="nofollow" href="#"><?php echo APP_TITLE ?></a></section>
+<section class="engine"><a rel="nofollow" href="#"><?php echo APP_TITLE ?> - Foros</a></section>
  <!-- ENLACES -->
 <?php include(HTML_DIR . 'overall/topnav.php'); ?>
 
@@ -65,7 +65,8 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
 
  <!-- breadcrumb -->
  <ol class="breadcrumb">
-   <li class="breadcrumb-item"><a href="#"><?php echo APP_TITLE; ?></a></li>
+   <li class="breadcrumb-item"><a href="?view=index"><i class="fa fa-home"></i> Inicio</a></li>
+   <li class="breadcrumb-item"><a href="?view=forum"><i class="fa fa-comments"></i> Foros</a></li>
  </ol>
  <!-- fin breadcrumb -->
 

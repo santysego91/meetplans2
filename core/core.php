@@ -16,6 +16,12 @@ define('APP_TITLE', 'Mi Web.com');
 define('APP_COPY', 'Copyright  &copy; ' . ' ' . date('Y',time()) . ' ' .'Miweb.com');
 define('IC_TOPIC_FORUM_DIR', 'views/app/images/forums/icons/boardicons/');
 
+#CONSTANTES DE CONFIGURACION
+
+#Foros
+define('FOROS_TITULO_LONG_MIN', 5);
+define('FOROS_CONT_LONG_MIN', 250);// para evitar spam se puede subir la cantidad
+define('FOROS_FORMAT_DATE_HR', 'd/n/y HH:MM');// http://php.net/manual/es/function.date.php   http://php.net/manual/es/datetime.formats.time.php
 
 
 #ESTRUCTURA

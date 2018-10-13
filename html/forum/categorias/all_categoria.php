@@ -43,6 +43,8 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
 
  <!-- breadcrumb -->
  <ol class="breadcrumb">
+   <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=index">Inicio</a></li>
+   <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=forum">Foros</a></li>   
    <li class="breadcrumb-item"><a href="?view=categorias">Categorias</a></li>
  </ol>
  <!-- fin breadcrumb -->

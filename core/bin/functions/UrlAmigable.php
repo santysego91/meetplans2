@@ -4,9 +4,17 @@
 
 //funcion para crear url´s amigables
 
-function UrlAmigable($id,$titulo){// url amigable para los foros
+function UrlAmigable($id,$titulo,$id_foro = null){// url amigable para los foros
 
+
+if(null == $id_foro){
   $titulo = $id . '-' . $titulo;
+}else {
+    $titulo = $id . '-' . $id_foro . '-' .$titulo;
+}
+
+
+
 
   // primero nos aseguramos de que los espacios se cambien por -
 

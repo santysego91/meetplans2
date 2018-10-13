@@ -29,25 +29,37 @@ if(isset($_GET['success'])){// definido en activarController.php
 <div class="row container">
 
 <?php
-if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){//la funcion permiso esta definida en $_users.php  - PARA GESTIONAR HAY QUE SER ADMIN por eso mayor o igual a 2 para poder visualizar los botones
- echo'
- <!-- botones admin foro -->
- <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
-    <a class="mbr-buttons__btn btn btn-danger" href="?view=index">NUEVO TEMA</a>
+$boton_Nuevo_Tema='
+<!-- botones crear foro-->
+  <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
+     <a class="mbr-buttons__btn btn btn-danger" href="?view=temas&mode=add&id_foro='.$id_foro.'">NUEVO TEMA</a>
+  </div>';
+if (isset($_SESSION['app_id'])) {
+  // si el user esta logeado
 
-</div>
+  if($_foros[$id_foro]['estado'] == 1 or $_users[$_SESSION['app_id']]['permiso'] == 2){//si el usuario es admin O el foro esta abierto
+    //la funcion permiso esta definida en $_users.php  - PARA GESTIONAR HAY QUE SER ADMIN por eso mayor o igual a 2 para poder visualizar los botones
 
- <!-- botones admin foro -->
- ';
+   echo $boton_Nuevo_Tema;
+  }
 }
+
+
 ?>
 
 
-<!-- breadcrumb -->
+
+
+
+
+<!-- breadcrumb    -->
+<?php
+$ID_f= UrlAmigable(intval($_foros[$id_foro]['id']),$_foros[$id_foro]['nombre']);
+?>
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="?view=index"><i class="fa fa-home"></i> Inicio</a></li>
   <li class="breadcrumb-item"><a href="?view=forum"><i class="fa fa-comments"></i> Foros</a></li>
-    <li class="breadcrumb-item"><a href="?view=forum"><?php echo $_foros[$id_foro]['nombre']; ?></a></li><!-- $id_foro la definimos en la linea 5 de forosController.php -->
+    <li class="breadcrumb-item"><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']; ?></a></li><!-- $id_foro la definimos en la linea 5 de forosController.php -->
 
 </ol>
 <!-- fin breadcrumb -->
@@ -85,7 +97,7 @@ echo '
   <tr>
   <th width="9%" scope="row"><div align="center"><img src="views/app/images/forums/icons/boardicons/on.gif" /></div></th>
   <td width="43%" ><div align="left">
-  <a href="temas/'.UrlAmigable($anuncio['id'],$anuncio['titulo']).'">
+  <a href="temas/'.UrlAmigable($anuncio['id'],$anuncio['titulo'],$id_foro).'">
   <strong>'.$anuncio['titulo'].'</strong></a></div></td>
   <td><div align="center">'.number_format($anuncio['visitas'],0,',','.').'</br>Visitas</div></td>
   <td><div align="center">'.number_format($anuncio['respuestas'],0,',','.').'</br>Respuestas</div></td>
@@ -164,7 +176,7 @@ echo '
      <tr>
      <th width="9%" scope="row"><div align="center"><img src="'.IC_TOPIC_FORUM_DIR.$extension.'" /></div></th>
      <td width="43%" ><div align="left">
-     <a href="temas/'.UrlAmigable($tema['id'],$tema['titulo']).'">
+     <a href="temas/'.UrlAmigable($tema['id'],$tema['titulo'],$id_foro).'">
      <strong>'.$tema['titulo'].'</strong></a></div></td>
      <td><div align="center">'.number_format($tema['visitas'],0,',','.').'</br>Visitas</div></td>
      <td><div align="center">'.number_format($tema['respuestas'],0,',','.').'</br>Respuestas</div></td>

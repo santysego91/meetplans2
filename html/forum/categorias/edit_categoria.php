@@ -52,6 +52,8 @@
 
   <!-- breadcrumb -->
   <ol class="breadcrumb">
+    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=index">Inicio</a></li>
+    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=forum">Foros</a></li>
     <li class="breadcrumb-item"><a href="?view=categorias">Categorias</a></li>
   </ol>
   <!-- fin breadcrumb -->
@@ -65,9 +67,10 @@
 
     <table width="100%" border="0" cellspacing="2" cellpadding="2">
        <tr>
-         <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" ><div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">EDITAR CATEGORÍAS</div></th>
+         <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
+           <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">EDITAR CATEGORÍAS</div></th>
        </tr>
-     </table>
+     </table><br />
   <!-- fin encabezado tabla -->
 
 
