@@ -91,6 +91,23 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
     }
     break;
 
+    // RESPONDER TEMA
+      case 'responder':
+      if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
+
+          if ($_POST) {
+            // mostrar vista estandar
+            echo'mostrar vista estandar';
+          } else {
+            // mostrar vista para responder
+            echo'mostrar vista para responder';
+          }
+
+            }
+      break;
+
+
+
   // CONVERTIR EL TEMA EN ANUNCIO
     case 'anuncio':
       if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
@@ -112,7 +129,8 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
         // verificar si el tema EXISTEN
           $tema = $temas->Check();
           if (false != $tema) {
-            // SI EXISTE - VISUALIZAR TEMA desde la variable $TEMA
+            // SI EXISTE - mostrar el controlador vista del post
+          include(HTML_DIR . 'forum/temas/ver_temas.php');
           } else {
             header('location: index.php?view=forum');
           }
