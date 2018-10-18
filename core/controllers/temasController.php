@@ -1,8 +1,9 @@
 <?php
 
+$mode = isset($_GET['mode']) ? $_GET['mode'] : null;
 
 //verificamos si esta definida la url del foro .htaccess   index.php?view=temas&id=$1&id_foro=$2
-if (isset($_GET['id_foro']) and is_numeric($_GET['id_foro']) and $_GET['id_foro'] >= 1) {
+if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
   //si esta definida la creamos. Siempre debe estar creada para que funcione ya que se depende del foro
   $id_foro = intval($_GET['id_foro']);
 
@@ -24,7 +25,7 @@ if (isset($_GET['id_foro']) and is_numeric($_GET['id_foro']) and $_GET['id_foro'
 
   $temas = new Temas();
 
-  switch (isset($_GET['mode']) ? $_GET['mode'] : null) { //verificamos si existe una variable $_GET['mode'], si lo hay mandamos $_GET['mode']. De lo contrario es null
+  switch ($mode) { //verificamos si existe una variable $_GET['mode'], si lo hay mandamos $_GET['mode']. De lo contrario es null
 
 
 
@@ -60,7 +61,8 @@ if (isset($_GET['id_foro']) and is_numeric($_GET['id_foro']) and $_GET['id_foro'
       }
 
     } else {
-      header('location: ?view=forum');
+    //  header('location: '.APP_URL.'?view=forum');
+          header('location: index.php?view=forum');
     }
     break;
 
@@ -71,7 +73,7 @@ if (isset($_GET['id_foro']) and is_numeric($_GET['id_foro']) and $_GET['id_foro'
   $temas->Delete();
 
     } else {
-      header('location: ?view=forum');
+      header('location: index.php?view=forum');
     }
     break;
 
@@ -82,7 +84,7 @@ if (isset($_GET['id_foro']) and is_numeric($_GET['id_foro']) and $_GET['id_foro'
   $temas->Close();
 
     } else {
-      header('location: ?view=forum');
+      header('location: index.php?view=forum');
     }
     break;
 
@@ -93,7 +95,7 @@ if (isset($_GET['id_foro']) and is_numeric($_GET['id_foro']) and $_GET['id_foro'
   $temas->Anuncio();
 
       } else {
-        header('location: ?view=forum');
+        header('location: index.php?view=forum');
       }
       break;
 
@@ -109,17 +111,26 @@ if (isset($_GET['id_foro']) and is_numeric($_GET['id_foro']) and $_GET['id_foro'
           if (false != $tema) {
             // SI EXISTE - VISUALIZAR TEMA desde la variable $TEMA
           } else {
-            header('location: ?view=forum');
+            header('location: index.php?view=forum');
           }
 
       } else {
-        header('location: ?view=forum');
+        header('location: index.php?view=forum');
       }
       break;
   }
 
 } else {
-    header('location: ?view=forum');
+
+
+if (null == $mode) {
+    header('location: ../index.php?view=forum');
+} else {
+    header('location: index.php?view=forum');
+}
+
+
+
 }
 
 

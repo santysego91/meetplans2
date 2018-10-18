@@ -1,6 +1,6 @@
 <?php include(HTML_DIR . 'overall/header.php'); ?>
 <body>
-<section class="engine"><a rel="nofollow" href="#"><?php echo APP_TITLE ?> - Crear tema</a></section>
+<section class="engine"><a rel="nofollow" href="#"><?php echo APP_TITLE. '- Crear tema' ?> </a></section>
  <!-- ENLACES -->
 <?php include(HTML_DIR . 'overall/topnav.php'); ?>
 
@@ -53,7 +53,7 @@
   $ID_f= UrlAmigable(intval($_foros[$id_foro]['id']),$_foros[$id_foro]['nombre']);
   ?>
   <ol class="breadcrumb">
-        <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=index">Inicio</a></li>
+    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=index">Inicio</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=forum">Foros</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']?>o</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=temas&mode=add&id_foro=<?php echo $id_foro ?>">Crear Tema</a></li>
@@ -65,26 +65,30 @@
 <table width="100%" border="0" cellspacing="2" cellpadding="2">
    <tr>
      <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
-       <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">Crear tema en: <?php echo $_foros[$id_foro]['nombre']?></div></th>
+       <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">
+         Crear tema en: <?php echo $_foros[$id_foro]['nombre']?></div></th>
    </tr>
  </table> <br /> <br />
   <!-- encabezado tabla -->
 
   <div class="col-sm-12">
-<form id="form_foro" action="?view=temas&mode=add" method="POST" enctype="application/x-www-form-urlencoded"><!--muy importante el enctype  -->
+
 
     <table width="100%" border="0" cellspacing="5" cellpadding="5">
+      <form class="form-horizontal" action="?view=temas&mode=add&id_foro=<?php echo $id_foro; ?>" method="POST" enctype="application/x-www-form-urlencoded"><!--muy importante el enctype  -->
+      <fieldset>
+
       <tr>
 
         <th width="30%">
           <div style="float: right;">
-            <label for="inputEmail" class="col-lg-2 control-label">Título:</label>
+            <label class="col-lg-2 control-label">Título:</label>
           </div>
         </th>
 
         <th colspan="2">
 
-          <input type="text" class="form-control" maxlength="250" name="titulo" placeholder="Nombre para el tema"/><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
+          <input type="text" class="form-control" maxlength="250" name="titulo" placeholder="Nombre para el tema"/><!--SE LE LLAMO name="nombre" PORQUE EN class.temas.php se le llamo asi empty($_POST['nombre'])   -->
         </th>
 
       </tr>
@@ -92,30 +96,29 @@
 
       <tr>
         <th rowspan="2" align="center" valign="top" scope="row"><br />
-        <div style="float: right;"><label for="inputEmail" class="col-lg-2 control-label">Contenido:</label></div>
+        <div style="float: right;"><label class="col-lg-2 control-label">Contenido:</label></div>
 <br/><br/><br/><br/><br/><br/>
 
-<div><center>BBCode</center></div><br/>
+<div><center>BBCode</center>
+
+<ul>
+<li type="circle">- [b]Negrita[/b]</li>
+<li type="square">- [u]Subrayar[/u]</li>
+<li type="disc">- [i]Cursiva[/i]</li>
+</ul>
 
 
-<div style="text-align: center;" id="tooltip_b">[b]Negrita[/b]</div>
-<div style="text-align: center;" id="tooltip_i">[i]Italic[/i]</div>
-<div style="text-align: center;" id="tooltip_u">[u]Subrayado[/u]</div>
-<div style="text-align: center;" id="tooltip_s">[s]Tachado[/s]</div>
-<div style="text-align: center;" id="tooltip_center">[center]Center[/center]</div>
-    	  <div style="text-align: center;" id="tooltip_email">[EMAIL=you@email.com]email[/EMAIL]</div>
-    	  <div style="text-align: center;" id="tooltip_url">[URL=http://site.com]website[/URL]</div>
-    	  <div style="text-align: center;" id="tooltip_img">[IMG]URL imagen[IMG]</div>
-    	  <div style="text-align: center;" id="tooltip_list">[LIST=a][*]point 1[/*][*]point 2[/*][/LIST]</div>
-    	  <div style="text-align: center;" id="tooltip_quote">[QUOTE=Nickname]Quote[/QUOTE]</div>
-    	  <div style="text-align: center;" id="tooltip_toggle">[TOGGLE=Read more]Full Text[/TOGGLE]</div>
+
+
+</div><br/>
+
+
 
 
         </th>
         <td colspan="2" align="center" >
 <br />
-            <textarea class="form-control" name="content" placeholder="Contenido de tu tema.." style=" height:350px;">
-            </textarea>
+<textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu tema.."></textarea>
       </td>
       </tr>
       <tr>
@@ -127,9 +130,13 @@
 
         </td>
       </tr>
+
+
+    </fieldset>
+</form>
     </table>
 
-</form>
+
 
 
  <!-- fin CONTENIDO -->

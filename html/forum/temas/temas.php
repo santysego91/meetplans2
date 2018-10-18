@@ -180,7 +180,7 @@ echo '
      <strong>'.$tema['titulo'].'</strong></a></div></td>
      <td><div align="center">'.number_format($tema['visitas'],0,',','.').'</br>Visitas</div></td>
      <td><div align="center">'.number_format($tema['respuestas'],0,',','.').'</br>Respuestas</div></td>
-     <td width="32%" ><div align="center"><a href="#" title="IR AL PERFIL">'.$_users[$tema['id_ultimo']]['user'].'</a><br />
+     <td width="32%" ><div align="center">Por: <a href="#" title="IR AL PERFIL">'.$_users[$tema['id_ultimo']]['user'].'</a><br />
      '.$tema['fecha_ultimo'].'</div></td>
      </tr>
 
@@ -191,12 +191,12 @@ echo '
 
      }
    } else {
-     // NO HAY ANUNCIOS
+     // NO HAY TEMAS
    echo '
-   <!-- ANUNCIOS-->
+   <!-- TEMAS-->
 
       <tr>
-      <th width="9%" scope="row"><div align="center">No hay anuncios.</div></td>
+      <th width="9%" scope="row"><div align="center">No hay temas.</div></td>
       </tr>
 
    <!-- linea-->

@@ -9,6 +9,7 @@ class Temas{
   private $titulo;
   private $content;
   private $id_foro;
+  private $id_dueno;
   //*********************************
   // __CONSTRUCT
   //*********************************
@@ -18,6 +19,8 @@ class Temas{
   //Con esto tendremos disponible el ID del tema para todos los metodos (edit, delete, close, anuncio) en temasController.php
   $this->id = isset($_GET['id']) ? intval($_GET['id']) : null;//Si esta definida en(temasController.php) la ponemos, si no null
   $this->id_foro = intval($_GET['id_foro']);
+  $this->id_dueno = isset($_SESSION['app_id']) ? $_SESSION['app_id'] : null;
+
   }
   //*********************************
   //*********************************
@@ -46,12 +49,10 @@ throw new Exception(2);
 }
 
 //Verificar cantidad de campos en contenido
-if (strlen($this->titulo) < FOROS_CONT_LONG_MIN) {
+if (strlen($this->content) < FOROS_CONT_LONG_MIN) {
   //si es menor a 10
 throw new Exception(3);
 }
-
-
 
 
     } catch (\Exception $error) {
@@ -64,34 +65,45 @@ throw new Exception(3);
 
 
 //ADD 11/10/18 - 21:50
-  public function Add($id){
-$this->Errors('?view=temas&mode=add&error=');
-$fecha = date(FOROS_FORMAT_DATE_HR,time());
-$this->db->query("INSERT INTO temas (titulo,contenido)
-VALUES ('$this->titulo','$this->content');");//PRIMERO PARAMETROS LUEGO VALORES
+  public function Add(){
+$this->Errors('?view=temas&mode=add&id_foro='.$this->id_foro.'&error=');
+$fecha = date(FOROS_FORMAT_DATE_HR, time());
+
+//insertar nuevo tema
+$this->db->query("INSERT INTO temas (titulo,contenido,id_foro,id_dueno,fecha,id_ultimo,fecha_ultimo)
+VALUES ('$this->titulo','$this->content','$this->id_foro','$this->id_dueno','$fecha','$this->id_dueno','$fecha');");//PRIMERO PARAMETROS LUEGO VALORES
+
+//almacenamos el valor del ID del post para usarla luego
+$ID_TEMA= $this->db->insert_id;
+
+//actualizar el foro y sumarle un tema y un mensaje
+$this->db->query("UPDATE foros SET cantidad_temas=cantidad_temas + '1', cantidad_mensajes=cantidad_mensajes + '1' WHERE id='$this->id_foro';");
+//Redirecciona al nuevo post (tema)
+header('location: temas/' . UrlAmigable($ID_TEMA,$this->titulo,$this->id_foro));//$this->db->insert_id   nos devolvera la ultima id que fue insetada
   }#
 
+
 //EDIT
-  public function Edit($id){
-$this->Errors('?view=temas&mode=edit&id='.$this->id.'&error=');
+  public function Edit(){
+$this->Errors('?view=temas&mode=edit&id='.$this->id.'&id_foro='.$this->id_foro.'&error=');
 
   }#
 
 //DELETE
-  public function Delete($id){
+  public function Delete(){
 $this->Errors('');
 
   }#
 
 
 //Cerrar tema
-  public function Close($id){
+  public function Close(){
 $this->Errors('');
 
   }#
 
 //Crear un tema ANUNCIO
-  public function Anuncio($id){
+  public function Anuncio(){
 $this->Errors('');
 
   }#
@@ -127,8 +139,5 @@ $this->Errors('');
   //*********************************
 
 }
-
-
-
 
  ?>

@@ -2,6 +2,12 @@
   -webkit-animation-name: none !important;
   animation-name: none !important;
 }
+#estilotextarea{
+  height:800px !important;
+  border: 2px solid #990000 !important;
+}
+
+
 html {
   position: relative;
   min-height: 100%;

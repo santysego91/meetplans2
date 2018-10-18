@@ -24,7 +24,7 @@ if(isset($_GET['view'])) {
  if(file_exists('core/controllers/' . strtolower($_GET['view']) . 'Controller.php')) {
        include('core/controllers/'. strtolower($_GET['view']) . 'Controller.php'); // si la view existe lo mostramos
      }else {
-       include('core/controllers/errorviewController.php');// si la view no existe mostrar error
+       include('core/controllers/errorController.php');// si la view no existe mostrar error
      }
  }else {
    include('core/controllers/indexController.php');// si la view no esta definida ir a:

@@ -1,6 +1,10 @@
 <?php
 /* Núcleo de la app*/
 session_start(); //Arranca session para que funcionen las variables
+
+date_default_timezone_set('Europe/Madrid');//estaflece la zona horaria
+//http://php.net/manual/es/timezones.php - listado de zonas horarias
+
 #CONSTANTES DE CONEXIÓN
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
@@ -21,7 +25,7 @@ define('IC_TOPIC_FORUM_DIR', 'views/app/images/forums/icons/boardicons/');
 #Foros
 define('FOROS_TITULO_LONG_MIN', 5);
 define('FOROS_CONT_LONG_MIN', 250);// para evitar spam se puede subir la cantidad
-define('FOROS_FORMAT_DATE_HR', 'd/n/y HH:MM');// http://php.net/manual/es/function.date.php   http://php.net/manual/es/datetime.formats.time.php
+define('FOROS_FORMAT_DATE_HR', 'd/n/y - H:i');// http://php.net/manual/es/function.date.php   http://php.net/manual/es/datetime.formats.time.php
 
 
 #ESTRUCTURA

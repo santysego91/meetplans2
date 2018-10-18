@@ -24,12 +24,12 @@ $db->liberar($sql_anuncios,$sql_temas);
 $db->close();
 } else {
   // NO EXISTE
-    header('location: ../?view=error');
+    header('location: '.APP_URL.'?view=error');
 }
 
 
 }else {
-  header('location: ../?view=forum');
+  header('location: '.APP_URL.'?view=forum');
 }
 
 
