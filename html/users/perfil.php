@@ -55,10 +55,20 @@ if (isset($_SESSION['app_id'])) {
 <table width="100%" border="0" cellspacing="5" cellpadding="5">
   <tr>
     <th width="30%" scope="col"><img src="<?php echo USER_PH_PERF_DIR . $_users[$id_usuario]['img_perfil']; ?>" width="127" height="125" alt="FOTO PERFIL" /></th>
-    <th width="70%" rowspan="4"  scope="col"><?php echo $_users[$id_usuario]['biografia'] ?></th>
+    <th width="70%" rowspan="4"  scope="col"><?php echo $_users[$id_usuario]['biografia']; ?></th>
   </tr>
   <tr>
-    <th scope="row"><br/>Nombre: <?php echo $_users[$id_usuario]['user'] ?></th>
+    <th scope="row"><br/>Nombre: <?php echo $_users[$id_usuario]['user']; ?>
+      <img src="<?php echo USER_PH_ICO_DIR . GetUserStatus($_users[$id_usuario]['ultima_conexion']);?>" />
+
+
+
+    </th>
+
+
+
+
+
   </tr>
   <tr>
     <th   scope="row">Rango: <?php echo $_users[$id_usuario]['rango'] ?></th>
@@ -68,7 +78,7 @@ if (isset($_SESSION['app_id'])) {
   </tr>
   <tr>
     <th   scope="row">Mensajes:</th>
-    <td   rowspan="3" ><br/><hr style="color: #0056b2;"><?php echo $_users[$id_usuario]['firma'] ?><br/><br/></td>
+    <td   rowspan="3" ><br/><hr style="color: #0056b2;"><?php echo BBcode($_users[$id_usuario]['firma']) ?><br/><br/></td>
   </tr>
   <tr>
     <th   scope="row">Edad: <?php echo $_users[$id_usuario]['edad'] ?></th>

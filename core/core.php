@@ -20,6 +20,7 @@ define('APP_TITLE', 'Mi Web.com');
 define('APP_COPY', 'Copyright  &copy; ' . ' ' . date('Y',time()) . ' ' .'Miweb.com');
 define('IC_TOPIC_FORUM_DIR', 'views/app/images/forums/icons/boardicons/');
 define('USER_PH_PERF_DIR', 'views/app/images/forums/avatars/');
+define('USER_PH_ICO_DIR', 'views/app/images/forums/icons/');
 
 #CONSTANTES DE CONFIGURACION
 
@@ -29,7 +30,7 @@ define('FOROS_CONT_LONG_MIN', 250);// para evitar spam se puede subir la cantida
 define('FOROS_FORMAT_DATE_HR', 'd/n/y - H:i');// http://php.net/manual/es/function.date.php   http://php.net/manual/es/datetime.formats.time.php
 
 
-#ESTRUCTURA
+#ESTRUCTURA FUNCIONES
 require('vendor/autoload.php');  //carga automatiamente todas las librerias que carguemos con composer
 require('core/models/class.Conexion.php');
 require('core/bin/functions/Encrypt.php');#Archivo encriptador de pass
@@ -39,13 +40,21 @@ require('core/bin/functions/LostPassTemplate.php');#Archivo que valida el regist
 require('core/bin/functions/Categorias.php');#Archivo que obtiene toda la info de categorias de foros
 require('core/bin/functions/Foros.php');#Archivo que obtiene toda la info de los foros
 require('core/bin/functions/UrlAmigable.php');#Archivo que obtiene toda la info de los foros
+require('core/bin/functions/BBcode.php');#Funcion para el foro BBCODE
+require('core/bin/functions/OnlineUsers.php');#Funcion que actualiza cada X segundos los usuarios conectados
+require('core/bin/functions/GetUserStatus.php');#Indica el icono del estado de coneccion del usuario
+
+
+
+
 
 #VARIABLES
 $_users = Users();//variable que utilizaremos para obtener datos de los usuarios. Definida en function/Users.php
 $_categorias = Categorias();//variable que utilizaremos para obtener datos de las categorias. Definida en function/Categorias.php
 $_foros = Foros();
-#CONSTANTES DE PHPMAILER
 
+
+#CONSTANTES DE PHPMAILER
 define('PHPMAILER_HOST', 'smtp.gmail.com');                // Host del SMTP. (Se puede usar el de google smtp.gmail.com)
 define('PHPMAILER_SMTP_AUTH', 'true');                     // Enable SMTP authentication
 define('PHPMAILER_USER', '');           // Usuario del Host SMTP (Puede ser tu correo gmail) para poder usarlo permitir otras apps en https://myaccount.google.com/lesssecureapps

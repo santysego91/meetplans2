@@ -105,6 +105,20 @@
 <li type="circle">- [b]Negrita[/b]</li>
 <li type="square">- [u]Subrayar[/u]</li>
 <li type="disc">- [i]Cursiva[/i]</li>
+<li type="disc">- [s]Tachado[/s]</li>
+<li type="disc">- [size=18]Tamaño 18[/size]</li>
+<li type="disc">- [color="coral"]Coral[/color]</li>
+<li type="disc">- [font="Wingdings"]Wingdings[/font]</li>
+<li type="disc">- [img]imagen.jpg[/img]</li>
+<li type="disc">- [url]http://google.com[/url]</li>
+<li type="disc">- [quote="James"]Texto que quiero citar.[/quote]</li>
+<li type="disc">- [h1]Cursiva[/h1]</li>
+<li type="disc">- [h2]Cursiva[/h2]</li>
+<li type="disc">- [h3]Cursiva[/h3]</li>
+<li type="disc">- [h4]Cursiva[/h4]</li>
+<li type="disc">- [h5]Cursiva[/h5]</li>
+<li type="disc">- [h6]Cursiva[/h6]</li>
+
 </ul>
 
 

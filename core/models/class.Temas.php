@@ -70,8 +70,12 @@ $this->Errors('?view=temas&mode=add&id_foro='.$this->id_foro.'&error=');
 $fecha = date(FOROS_FORMAT_DATE_HR, time());
 
 //insertar nuevo tema
+
+//pasar el contenido del tema o post a BBcode
+$POST=BBcode($this->content);
+
 $this->db->query("INSERT INTO temas (titulo,contenido,id_foro,id_dueno,fecha,id_ultimo,fecha_ultimo)
-VALUES ('$this->titulo','$this->content','$this->id_foro','$this->id_dueno','$fecha','$this->id_dueno','$fecha');");//PRIMERO PARAMETROS LUEGO VALORES
+VALUES ('$this->titulo','$POST','$this->id_foro','$this->id_dueno','$fecha','$this->id_dueno','$fecha');");//PRIMERO PARAMETROS LUEGO VALORES
 
 //almacenamos el valor del ID del post para usarla luego
 $ID_TEMA= $this->db->insert_id;

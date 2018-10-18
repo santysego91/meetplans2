@@ -15,7 +15,7 @@ else{si NO ir a una pag.}
  */
 
 
-
+OnlineUsers();//Llamamos esta funcion porque queremos que este de forma global (que sea accesible en toda la app)
 
 
 
