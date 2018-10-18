@@ -87,7 +87,9 @@ header('location: ?view=configforos&mode=edit&id='.$this->id.'&success=true');
   }
   public function Delete(){
     $this->id = intval($_GET['id']);
-$this->db->query("DELETE FROM foros WHERE id='$this->id';");
+$query  = "DELETE FROM foros WHERE id='$this->id';";
+$query .= "DELETE FROM temas WHERE id_foro='$this->id';";
+$this->db->multi_query($query);
     header('location: ?view=configforos&success=true');
   }
 

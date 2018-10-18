@@ -1,8 +1,6 @@
 <?php
 //PENDIENTES
 /*
-1- En class.Categorias.php borrar tambien los temas asosiados a la categoria
-2- En class.ConfigForos.php borrar los temas asosiados al foro
 3- Hacer que no se puedan borrar todos los usuarios. (Siempre tiene que quedar el admin general)
 */
 

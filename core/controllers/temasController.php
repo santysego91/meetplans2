@@ -16,7 +16,10 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
   if ($loged) {//cuando esta logeado pasamos a la espera de verificar el resto
   //verificar si el tema es cerrado o si es admin
   // para ello lo pasaremos por la url
-  $cerrado = $_foros[$id_foro]['estado'] == 1 or $_users[$_SESSION['app_id']]['permiso'] == 2;
+  // esta linea cambia en php7
+  //php 5.6  $cerrado = $_foros[$id_foro]['estado'] == 1 or $_users[$_SESSION['app_id']]['permiso'] == 2;
+  //php 7    $cerrado = ($_foros[$id_foro]['estado'] == 1 or $_users[$_SESSION['app_id']]['permiso'] == 2);
+  $cerrado = ($_foros[$id_foro]['estado'] == 1 or $_users[$_SESSION['app_id']]['permiso'] == 2);
   }else {
     $cerrado = false;
   }

@@ -101,7 +101,7 @@ echo '
   <strong>'.$anuncio['titulo'].'</strong></a></div></td>
   <td><div align="center">'.number_format($anuncio['visitas'],0,',','.').'</br>Visitas</div></td>
   <td><div align="center">'.number_format($anuncio['respuestas'],0,',','.').'</br>Respuestas</div></td>
-  <td width="32%" ><div align="center"><a href="#" title="IR AL PERFIL">'.$_users[$anuncio['id_ultimo']]['user'].'</a><br />
+  <td width="32%" ><div align="center"><a href="?view=perfil&id='.$anuncio['id_ultimo'].'" title="IR AL PERFIL (html/forum/temas/temas.php)">'.$_users[$anuncio['id_ultimo']]['user'].'</a><br />
   '.$anuncio['fecha_ultimo'].'</div></td>
   </tr>
 
@@ -180,7 +180,7 @@ echo '
      <strong>'.$tema['titulo'].'</strong></a></div></td>
      <td><div align="center">'.number_format($tema['visitas'],0,',','.').'</br>Visitas</div></td>
      <td><div align="center">'.number_format($tema['respuestas'],0,',','.').'</br>Respuestas</div></td>
-     <td width="32%" ><div align="center">Por: <a href="#" title="IR AL PERFIL">'.$_users[$tema['id_ultimo']]['user'].'</a><br />
+     <td width="32%" ><div align="center">Por: <a href="?view=perfil&id='.$tema['id_ultimo'].'" title="IR AL PERFIL (html/forum/temas/temas.php)">'.$_users[$tema['id_ultimo']]['user'].'</a><br />
      '.$tema['fecha_ultimo'].'</div></td>
      </tr>
 
