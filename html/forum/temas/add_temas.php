@@ -55,7 +55,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=index">Inicio</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=forum">Foros</a></li>
-    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']?>o</a></li>
+    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']?></a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=temas&mode=add&id_foro=<?php echo $id_foro ?>">Crear Tema</a></li>
   </ol>
   <!-- fin breadcrumb -->
@@ -88,7 +88,7 @@
 
         <th colspan="2">
 
-          <input type="text" class="form-control" maxlength="250" name="titulo" placeholder="Nombre para el tema"/><!--SE LE LLAMO name="nombre" PORQUE EN class.temas.php se le llamo asi empty($_POST['nombre'])   -->
+          <input type="text" class="form-control" maxlength="250" name="titulo" placeholder="Nombre para el tema" required="" /><!--SE LE LLAMO name="nombre" PORQUE EN class.temas.php se le llamo asi empty($_POST['nombre'])   -->
         </th>
 
       </tr>
@@ -132,7 +132,25 @@
         </th>
         <td colspan="2" align="center" >
 <br />
-<textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu tema.."></textarea>
+<textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu tema.." required="" ></textarea>
+<br />
+
+<?php
+if ($_users[$_SESSION['app_id']]['permiso'] > 0) {
+  // si el usuario tiene el permiso 1 o 2
+  echo '
+  <div style="float: right;">
+    <label class="control-label">
+      Crear tema como anuncio:
+      <input type="checkbox" value="2" name="anuncio"></input>
+    </label></div>
+  ';
+}
+?>
+
+
+
+
       </td>
       </tr>
       <tr>

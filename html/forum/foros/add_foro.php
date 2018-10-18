@@ -114,7 +114,7 @@
         <div class="form-group">
           <label for="inputEmail" class="col-lg-2 control-label">Foro</label>
           <div class="col-lg-10">
-          <input type="text" class="form-control" maxlength="200" name="nombre" placeholder="Nombre del foro"><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
+          <input type="text" class="form-control" maxlength="200" name="nombre" placeholder="Nombre del foro" required="" ><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
         </div>
       </div>
 
@@ -122,7 +122,7 @@
       <div class="form-group">
         <label for="inputEmail" class="col-lg-2 control-label">Descripción</label>
         <div class="col-lg-10">
-        <input type="text" class="form-control" maxlength="250" name="descripcion" placeholder="Descripción corta para el foro (Acepta HTML)"><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
+        <input type="text" class="form-control" maxlength="250" name="descripcion" placeholder="Descripción corta para el foro (Acepta HTML)" required="" ><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
       </div>
       </div>
 
@@ -135,7 +135,7 @@
 
 
 
-        <select  name="categoria" class="form-control">
+        <select  name="categoria" class="form-control" required="" >
             <?php
             //verificar que las categorias no esten vacias antes de recorrerlas
             if(false != $_categorias){

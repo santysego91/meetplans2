@@ -84,7 +84,7 @@
         <div class="form-group">
           <label for="inputEmail" class="col-lg-2 control-label">Categoria</label>
           <div class="col-lg-10">
-          <input type="text" class="form-control" name="nombre" placeholder="Nombre para la categoria"><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
+          <input type="text" class="form-control" name="nombre" placeholder="Nombre para la categoria" required="" ><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
         </div>
       </div>
       <div class="form-group">

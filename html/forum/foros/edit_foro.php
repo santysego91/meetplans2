@@ -115,7 +115,7 @@ $id_foro = intval($_GET['id']);
         <div class="form-group">
           <label for="inputEmail" class="col-lg-2 control-label">Foro</label>
           <div class="col-lg-10">
-          <input type="text" class="form-control" maxlength="200" name="nombre" placeholder="Nombre del foro" value="<?php echo $_foros[$_GET['id']]['nombre']; ?>"><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
+          <input type="text" class="form-control" maxlength="200" name="nombre" placeholder="Nombre del foro" value="<?php echo $_foros[$_GET['id']]['nombre']; ?>" required="" ><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
         </div>
       </div>
 
@@ -123,7 +123,7 @@ $id_foro = intval($_GET['id']);
       <div class="form-group">
         <label for="inputEmail" class="col-lg-2 control-label">Descripción</label>
         <div class="col-lg-10">
-        <input type="text" class="form-control" maxlength="250" name="descripcion" placeholder="Descripción corta para el foro (Acepta HTML)" value="<?php echo $_foros[$_GET['id']]['descripcion']; ?>"><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
+        <input type="text" class="form-control" maxlength="250" name="descripcion" placeholder="Descripción corta para el foro (Acepta HTML)" value="<?php echo $_foros[$_GET['id']]['descripcion']; ?>" required="" ><!--SE LE LLAMO name="nombre" PORQUE EN class.Categorias.php se le llamo asi empty($_POST['nombre'])   -->
       </div>
       </div>
 

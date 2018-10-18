@@ -56,12 +56,23 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
     case 'edit':
     if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
 
-  //tenemos que chekear los $_POST
-      if ($_POST) {
-        $temas->Edit();
-      } else {
-        // code...
-      }
+
+      // verificar si el tema EXISTEN
+        $tema = $temas->Check();
+        if (false != $tema) {
+          // EL TEMA EXISTE
+
+          //tenemos que chekear los $_POST
+              if ($_POST) {
+                $temas->Edit();
+              } else {
+                include(HTML_DIR . 'forum/temas/edit_tema.php');
+              }
+
+        } else {
+          header('location: index.php?view=forum');
+        }
+
 
     } else {
     //  header('location: '.APP_URL.'?view=forum');
@@ -82,38 +93,60 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
 
   // CERRAR TEMA
     case 'close':
-    if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
-
-  $temas->Close();
+    if ($isset_id and $loged and isset($_GET['estado']) and in_array($_GET['estado'], [0,1])) {//verificamos que las diferntes id esten definidas y que el estado este entre el 0 o 1
+//si devuelve true entonces es que recibio una id de tema y se puede visualizar
+  $temas->Close($_GET['estado']);
 
     } else {
       header('location: index.php?view=forum');
     }
     break;
 
-  // CONVERTIR EL TEMA EN ANUNCIO
-    case 'anuncio':
-      if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
 
-  $temas->Anuncio();
 
-      } else {
-        header('location: index.php?view=forum');
-      }
+
+
+    // RESPONDER TEMA
+      case 'responder':
+  if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
+
+         //verificar si el tema EXISTEN
+          $tema = $temas->Check();
+         if (false != $tema) {
+            // EL TEMA EXISTE
+               if ($tema['estado'] == 0) {//con esto rebotamos a cualquier usuario que quiera acceder a responder desde la url (como medida de seguridad)
+               header('location: index.php?view=forum');
+                exit;
+                                          }
+            //tenemos que chekear los $_POST
+                  if ($_POST) {
+                  $temas->Responder();
+                } else {
+                      include(HTML_DIR . 'forum/temas/responder_tema.php');
+                  }
+                } else {
+                  header('location: index.php?view=forum');
+                }
+        }
       break;
+
+
+
+
+
 
 
   // ACCION DEFAULT
     default:
       //aqui es la parte de la visualizacion del tema
       if ($isset_id) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
-
-
         // verificar si el tema EXISTEN
           $tema = $temas->Check();
           if (false != $tema) {
-            // SI EXISTE - VISUALIZAR TEMA desde la variable $TEMA
-            echo 'AQUI EL POST-TEMA';
+            // SI EXISTE - mostrar el controlador vista del post
+            IncrementarVisitas($_GET['id']);//le pasamos a la funcion del tema el id
+            $respuestas = $temas->GetRespuestas();//  con esto tenemos disponible GetRespuestas (definida en class.Temas.php) directamente en la vista
+          include(HTML_DIR . 'forum/temas/ver_temas.php');
           } else {
             header('location: index.php?view=forum');
           }
@@ -127,11 +160,11 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
 } else {
 
 
-if (null == $mode) {
-    header('location: ../index.php?view=forum');
-} else {
-    header('location: index.php?view=forum');
-}
+            if (null == $mode) {
+                header('location: ../index.php?view=forum');
+                } else {
+                    header('location: index.php?view=forum');
+                    }
 
 
 

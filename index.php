@@ -1,7 +1,16 @@
 <?php
 //PENDIENTES
-/*
-3- Hacer que no se puedan borrar todos los usuarios. (Siempre tiene que quedar el admin general)
+/*3- Hacer que no se puedan borrar todos los usuarios. (Siempre tiene que quedar el admin general)
+/*1- REVISAR QUE CUANDO SE RESPONDE UN TEMA NO SE LE SUMA 1 A LA CANTIDAD DE MENSAJES DEL USUARIO NI AL TEMA
+/*2- REVISAR CUANDO BORRO CATEGORIA, BORRAR TODAS LAS RESPUESTAS DE LA CATEGORIA TBN Y SUS TEMAS INTERNOS
+/*1- CUANDO SE EDITA UN TEMA SI ES EL ULTIMO. NO SALE EL NUEVO NOMBRE EN EL INDEX DE FOROS
+/*2-
+/*1-
+/*2-
+
+
+
+
 */
 
 //index.php se encarga de llamar a los controladores

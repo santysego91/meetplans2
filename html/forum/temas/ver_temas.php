@@ -139,10 +139,10 @@ $ID_t= UrlAmigable(intval($tema['id']),$tema['titulo'],intval($_foros[$id_foro][
     <th   scope="row">Rango: <?php echo $_users[$tema['id_dueno']]['rango'] ?></th>
   </tr>
   <tr>
-    <th   scope="row">Temas: </th>
+    <th   scope="row"></th>
   </tr>
   <tr>
-    <th   scope="row">Mensajes:</th>
+    <th   scope="row">Mensajes: <?php echo $_users[$tema['id_dueno']]['mensajes'] ?></th>
     <td   rowspan="3" ><br/><hr style="color: #0056b2;"><?php echo BBcode($_users[$tema['id_dueno']]['firma']) ?><br/><br/></td>
   </tr>
   <tr>
@@ -158,61 +158,68 @@ $ID_t= UrlAmigable(intval($tema['id']),$tema['titulo'],intval($_foros[$id_foro][
 <!--respuesta ****************************************************************************-->
 
 <?php
-for($x =0; $x <= 5; $x++ ){
+if(false != $respuestas) {
+  // SI HAY RESPUESTA
+  foreach($respuestas as $resp){
 
-echo'
-
-
-<div class="col-sm-12">
-
-<br/><hr style="color: #0056b2;">
-<table width="100%" border="0" cellspacing="5" cellpadding="5">
- <tr>
-   <th width="30%" scope="col">
-   <img src="'. USER_PH_PERF_DIR . $_users[$tema['id_dueno']]['img_perfil'].'" alt="FOTO PERFIL" />
-   </th>
-   <th width="70%" rowspan="4"  scope="col">
-
-   <div align="right">
-    <a href="#">[EDITAR]</a>
-   </div>
-
-     EJEMPLO CONTENIDO</th>
- </tr>
- <tr>
-   <th scope="row"><br/>Nombre: '. $_users[$tema['id_dueno']]['user'].'
-     <img src="'. USER_PH_ICO_DIR . GetUserStatus($_users[$tema['id_dueno']]['ultima_conexion']).'" />
-   </th>
- </tr>
-
- <tr>
-   <th   scope="row">Rango: '. $_users[$tema['id_dueno']]['rango'].'</th>
- </tr>
- <tr>
-   <th scope="row">Temas: </th>
- </tr>
- <tr>
-   <th   scope="row">Mensajes:</th>
-   <td   rowspan="3" ><br/><hr style="color: #0056b2;">
-EJEMPLO FIRMA
-     <br/><br/></td>
- </tr>
- <tr>
-   <th   scope="row">Edad: '. $_users[$tema['id_dueno']]['edad'].'</th>
- </tr>
- <tr>
-   <th   scope="row">Registrado el: '. $_users[$tema['id_dueno']]['fecha_reg'].'</th>
- </tr>
-</table>
+  echo'
 
 
+  <div class="col-sm-12">
 
-</div>
+  <br/><hr style="color: #0056b2;">
+  <table width="100%" border="0" cellspacing="5" cellpadding="5">
+   <tr>
+     <th width="30%" scope="col">
+     <img src="'. USER_PH_PERF_DIR . $_users[$resp['id_dueno']]['img_perfil'].'" alt="FOTO PERFIL" />
+     </th>
+     <th width="70%" rowspan="4"  scope="col">
+
+     <div align="right">
+      <a href="#">[EDITAR]</a>
+     </div>
+
+       '.BBcode($resp['contenido']).'</th>
+   </tr>
+   <tr>
+     <th scope="row"><br/>Nombre: '. $_users[$resp['id_dueno']]['user'].'
+       <img src="'. USER_PH_ICO_DIR . GetUserStatus($_users[$resp['id_dueno']]['ultima_conexion']).'" />
+     </th>
+   </tr>
+
+   <tr>
+     <th   scope="row">Rango: '. $_users[$resp['id_dueno']]['rango'].'</th>
+   </tr>
+   <tr>
+     <th scope="row"></th>
+   </tr>
+   <tr>
+     <th   scope="row">Mensajes: '. $_users[$resp['id_dueno']]['mensajes'].'</th>
+     <td   rowspan="3" ><br/><hr style="color: #0056b2;">
+  '.BBcode($_users[$resp['id_dueno']]['firma']).'
+       <br/><br/></td>
+   </tr>
+   <tr>
+     <th   scope="row">Edad: '. $_users[$resp['id_dueno']]['edad'].'</th>
+   </tr>
+   <tr>
+     <th   scope="row">Registrado el: '. $_users[$resp['id_dueno']]['fecha_reg'].'</th>
+   </tr>
+  </table>
 
 
 
-';
-}
+  </div>
+
+  ';
+  }
+} // SI NO HAY RESPUESTAS         else {}
+
+
+
+
+
+
 ?>
 
 

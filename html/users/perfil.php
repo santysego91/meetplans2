@@ -77,7 +77,7 @@ if (isset($_SESSION['app_id'])) {
     <th   scope="row">Temas: <?php echo $db->recorrer($sql)[0]; //recorre el primer elemento que declaramos en $sql perfilController?>  </th>
   </tr>
   <tr>
-    <th   scope="row">Mensajes:</th>
+    <th   scope="row">Mensajes: <?php echo $_users[$id_usuario]['mensajes'] ?></th>
     <td   rowspan="3" ><br/><hr style="color: #0056b2;"><?php echo BBcode($_users[$id_usuario]['firma']) ?><br/><br/></td>
   </tr>
   <tr>

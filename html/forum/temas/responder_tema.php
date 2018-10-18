@@ -1,49 +1,21 @@
 <?php include(HTML_DIR . 'overall/header.php'); ?>
 <body>
-<section class="engine"><a rel="nofollow" href="#"><?php echo APP_TITLE. '- Editar tema' ?> </a></section>
+<section class="engine"><a rel="nofollow" href="#"><?php echo APP_TITLE. '- Responder tema' ?> </a></section>
  <!-- ENLACES -->
 <?php include(HTML_DIR . 'overall/topnav.php'); ?>
-
-
-
-
-
  <section class="mbr-section mbr-after-navbar" id="content1-10">
      <div class="mbr-section__container container mbr-section__container--isolated">
  <!-- CONTENIDO -->
 
-
-
-
-
    <?php
-
-
    if(isset($_GET['error'])){// definido en activarController.php
-      if($_GET['error'] == 1){
         echo '
       <div class="mbr-section__container container mbr-section__container--isolated">
       <div class="alert alert-dismissible alert-danger">
       <strong>Error!</strong> Todos los campos deben ser completados.(add_temas.php)
       </div></br>';
-    } else if($_GET['error'] == 2){
-      echo '
-    <div class="mbr-section__container container mbr-section__container--isolated">
-    <div class="alert alert-dismissible alert-danger">
-    <strong>Error!</strong> El titulo del tema debe tener al menos '. FOROS_TITULO_LONG_MIN .' caracteres.(add_temas.php)
-    </div></br>
-    ';
-    }else {
-      echo '
-    <div class="mbr-section__container container mbr-section__container--isolated">
-    <div class="alert alert-dismissible alert-danger">
-    <strong>Error!</strong> El contenido del tema debe tener al menos '. FOROS_CONT_LONG_MIN .' caracteres.(add_temas.php)
-    </div></br>
-    ';
-    }
 
    }
-
     ?>
 
 
@@ -51,16 +23,12 @@
   <!-- breadcrumb -->
   <?php
   $ID_f= UrlAmigable(intval($_foros[$id_foro]['id']),$_foros[$id_foro]['nombre']);
-  $ID_t= UrlAmigable(intval($tema['id']),$tema['titulo'],intval($_foros[$id_foro]['id']));
   ?>
-
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=index">Inicio</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=forum">Foros</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']?></a></li>
-    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="temas/<?php echo $ID_t; ?>"><?php echo $tema['titulo']; ?></a></li>
-    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="index.php?view=temas&mode=edit&id=<?php echo intval($tema['id']); ?>&id_foro=<?php echo $id_foro ?>">Editar Tema</a></li>
-
+    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=temas&mode=responder&id=<?php echo $_GET['id'] ?>&id_foro=<?php echo $id_foro ?>">Responder Tema</a></li>
   </ol>
   <!-- fin breadcrumb -->
 
@@ -70,7 +38,7 @@
    <tr>
      <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
        <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">
-         Editar tema: <?php echo $tema['titulo']?></div></th>
+         Responder tema: <?php echo $tema['titulo']?></div></th>
    </tr>
  </table> <br /> <br />
   <!-- encabezado tabla -->
@@ -79,22 +47,12 @@
 
 
     <table width="100%" border="0" cellspacing="5" cellpadding="5">
-      <form class="form-horizontal" action="?view=temas&mode=edit&id_foro=<?php echo $id_foro; ?>&id=<?php echo $_GET['id']; ?>" method="POST" enctype="application/x-www-form-urlencoded"><!--muy importante el enctype  -->
+      <form class="form-horizontal" action="?view=temas&mode=responder&id_foro=<?php echo $id_foro; ?>&id=<?php echo $_GET['id']; // este es el id del tema?>" method="POST" enctype="application/x-www-form-urlencoded"><!--muy importante el enctype  -->
       <fieldset>
 
       <tr>
-
-        <th width="30%">
-          <div style="float: right;">
-            <label class="col-lg-2 control-label">Título:</label>
-          </div>
-        </th>
-
-        <th colspan="2">
-
-          <input type="text" class="form-control" maxlength="250" name="titulo" placeholder="Nombre para el tema" value="<?php echo $tema['titulo']; ?>" required="" /><!--SE LE LLAMO name="nombre" PORQUE EN class.temas.php se le llamo asi empty($_POST['nombre'])   -->
-        </th>
-
+        <th width="30%"></th>
+        <th colspan="2"></th>
       </tr>
 
 
@@ -136,22 +94,9 @@
         </th>
         <td colspan="2" align="center" >
 <br />
-<textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu tema.." required="" ><?php echo $tema['contenido']; ?></textarea>
+<textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu respuesta.."></textarea>
 <br />
 
-<?php
-if ($_users[$_SESSION['app_id']]['permiso'] > 0) {
-  // si el usuario tiene el permiso 1 o 2
-  $cheked = $tema['tipo'] == 2 ? 'checked' : '';//esto es un if compacto que comprueba el estado del input
-  echo '
-  <div style="float: right;">
-    <label class="control-label">
-      Tema como anuncio:
-      <input type="checkbox" value="2" name="anuncio" '. $cheked .'/>
-    </label></div>
-  ';
-}
-?>
 
 
 
@@ -163,7 +108,7 @@ if ($_users[$_SESSION['app_id']]['permiso'] > 0) {
         <td width="" align="right" valign="middle">
       <br/>
               <button type="reset" class="btn btn-default">RESETEAR</button>
-              <button type="submit" class="btn btn-primary">EDITAR</button>
+              <button type="submit" class="btn btn-primary">RESPONDER</button>
 
         </td>
       </tr>
