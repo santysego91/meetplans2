@@ -77,7 +77,7 @@ VALUES ('$this->titulo','$this->content','$this->id_foro','$this->id_dueno','$fe
 $ID_TEMA= $this->db->insert_id;
 
 //actualizar el foro y sumarle un tema y un mensaje
-$this->db->query("UPDATE foros SET cantidad_temas=cantidad_temas + '1', cantidad_mensajes=cantidad_mensajes + '1' WHERE id='$this->id_foro';");
+$this->db->query("UPDATE foros SET cantidad_temas=cantidad_temas + '1', cantidad_mensajes=cantidad_mensajes + '1', ultimo_tema='$this->titulo', id_ultimo_tema='$ID_TEMA'  WHERE id='$this->id_foro';");
 //Redirecciona al nuevo post (tema)
 header('location: temas/' . UrlAmigable($ID_TEMA,$this->titulo,$this->id_foro));//$this->db->insert_id   nos devolvera la ultima id que fue insetada
   }#

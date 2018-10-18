@@ -1,4 +1,8 @@
 <?php
-include('html/overall/logout.php');
+
+//borramos todas las $_SESSION
+unset($_SESSION['app_id'], $_SESSION['cantidad_usuarios'],$_SESSION['users']);
+header('location: ?view=index');
+//include('html/overall/logout.php');
 
 ?>

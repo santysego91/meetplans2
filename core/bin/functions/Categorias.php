@@ -8,10 +8,7 @@ $sql = $db->query("SELECT * FROM categorias;");
 if($db->rows($sql) > 0) {
   while($d = $db->recorrer($sql)) {//recorrer() definida en class.Conexion.php
 
-    $categorias[$d['id']]= array(
-    'id'=> $d['id'],
-    'nombre'=> $d['nombre']
-    );
+    $categorias[$d['id']]= $d;
     }
 }else {
   $categorias = false;

@@ -114,6 +114,20 @@ if ($prepare_sql->num_rows > 0) {
     }else {
       $extension = 'lock.gif';
     }
+
+
+    if ($_foros[$id_del_foro]['ultimo_tema'] == '') {//si el ultimo tema esta vacio
+      $ultimo_tema= '<a href="#" title="Sin temas en el foro">No hay temas.</a>';
+    } else {
+  $ultimo_tema= '<a href="temas/'.UrlAmigable($_foros[$id_del_foro]['id_ultimo_tema'],$_foros[$id_del_foro]['ultimo_tema'],$id_del_foro).'" title="Ir al tema">'. $_foros[$id_del_foro]['ultimo_tema'].'</a>';
+
+
+    }
+
+
+
+
+
     // muestra esto la cantidad de veces que encuentre un foro aqui
     echo '
 
@@ -126,8 +140,7 @@ if ($prepare_sql->num_rows > 0) {
     '.$_foros[$id_del_foro]['descripcion'].'</div></td>
     <td><div align="center">'.number_format($_foros[$id_del_foro]['cantidad_temas'],0,',','.').' </div></td>
     <td><div align="center">'.number_format($_foros[$id_del_foro]['cantidad_mensajes'],0,',','.').' </div></td>
-    <td width="32%" rowspan="2"><div align="center"><a href="#" title="IR AL PERFIL">Usuario</a><br />
-    11/10/18 - 21:50</div></td>
+    <td width="32%" rowspan="2"><div align="center">'.$ultimo_tema.'</div></td>
     </tr>
     <tr>
     <td width="8%"><p align="center">Temas</p>    </td>

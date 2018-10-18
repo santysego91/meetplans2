@@ -17,7 +17,8 @@
               paguina de 'Debes estar logeado' (public/logearte.php)
 
               <div class="alert alert-dismissible alert-danger">
-              <strong>Información</strong> para visualizar esta página debes haber <a data-toggle="modal" data-target="#Login">Iniciado Sesión</a>
+              <strong>Información</strong> para visualizar esta página debes haber
+              <a data-toggle="modal" data-target="#Login">Iniciado Sesión</a>
               </div>
 
             </p>

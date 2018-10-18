@@ -62,9 +62,9 @@ try {
 
     $mail->send();
 
-
+  $fecha_reg= FOROS_FORMAT_DATE_HR;
     // si no hay error instertamos usuario
-      $db->query("INSERT INTO users (user, pass, email, keyreg) VALUES ('$user','$pass','$email','$keyreg');");
+      $db->query("INSERT INTO users (user, pass, email, keyreg ,fecha_reg) VALUES ('$user','$pass','$email','$keyreg','$fecha_reg');");
       $sql_2= $db->query("SELECT MAX(id) AS id FROM users;");
       $_SESSION['app_id'] = $db-> recorrer($sql_2)[0];
       $db-> liberar($sql_2);

@@ -22,7 +22,7 @@ if($db->rows($sql) > 0 ){
   // esto es con PHP 5, en 7 cambia por si da error
     $_SESSION['app_id'] = $db->recorrer($sql)[0];//creamos la variable de session ['app_id'] para manejar la id de usuario
 
-echo 1;
+    header('location: index.php');
 
 }else {//mensaje de error (no coinciden los datos)
   echo '<div class="alert alert-dismissible alert-danger">

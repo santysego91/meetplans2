@@ -1,7 +1,7 @@
 <?php
 
 
-echo 'pag logout.php';
+
 
 
 session_start();
