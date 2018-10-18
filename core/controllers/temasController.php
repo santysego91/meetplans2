@@ -56,12 +56,23 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
     case 'edit':
     if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
 
-  //tenemos que chekear los $_POST
-      if ($_POST) {
-        $temas->Edit();
-      } else {
-        // code...
-      }
+
+      // verificar si el tema EXISTEN
+        $tema = $temas->Check();
+        if (false != $tema) {
+          // EL TEMA EXISTE
+
+          //tenemos que chekear los $_POST
+              if ($_POST) {
+                $temas->Edit();
+              } else {
+                include(HTML_DIR . 'forum/temas/edit_tema.php');
+              }
+
+        } else {
+          header('location: index.php?view=forum');
+        }
+
 
     } else {
     //  header('location: '.APP_URL.'?view=forum');
@@ -82,9 +93,9 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
 
   // CERRAR TEMA
     case 'close':
-    if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
-
-  $temas->Close();
+    if ($isset_id and $loged and isset($_GET['estado']) and in_array($_GET['estado'], [0,1])) {//verificamos que las diferntes id esten definidas y que el estado este entre el 0 o 1
+//si devuelve true entonces es que recibio una id de tema y se puede visualizar
+  $temas->Close($_GET['estado']);
 
     } else {
       header('location: index.php?view=forum');
@@ -105,20 +116,6 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
 
             }
       break;
-
-
-
-  // CONVERTIR EL TEMA EN ANUNCIO
-    case 'anuncio':
-      if ($isset_id and $loged) {//si devuelve true entonces es que recibio una id de tema y se puede visualizar
-
-  $temas->Anuncio();
-
-      } else {
-        header('location: index.php?view=forum');
-      }
-      break;
-
 
   // ACCION DEFAULT
     default:

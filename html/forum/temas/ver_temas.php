@@ -19,25 +19,67 @@
 <div class="row container">
 
 <?php
-$ID_TM = $_GET['id'];
-$boton_Nuevo_Tema='
-<!-- botones crear foro-->
-  <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
-     <a class="mbr-buttons__btn btn btn-danger" href="?view=temas&mode=responder&id='.$ID_TM.'">RESPONDER</a>
-  </div>';
-if (isset($_SESSION['app_id'])) {
-  // si el user esta logeado
 
-   echo $boton_Nuevo_Tema;
+if (isset($_SESSION['app_id'])) {
+  // si el usuario esta conectado
+
+  $ID_TM = $_GET['id'];
+  $permisos_o_dueno = ($_users[$_SESSION['app_id']]['permiso'] > 0 or $tema['id_dueno'] == $_SESSION['app_id']);
+
+  if ($tema['estado'] == 1) {
+    // Si el tema esta abierto
+  echo '
+    <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
+       <a class="mbr-buttons__btn btn btn-danger" href="?view=temas&mode=responder&id='.$ID_TM.'&id_foro='. $_GET['id_foro'] .'">RESPONDER</a>
+    </div>';
+  }else if($permisos_o_dueno and $tema['estado'] == 0){
+    //SI ESTA cerrado
+    echo '
+      <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
+         <a class="mbr-buttons__btn btn btn-danger" href="?view=temas&mode=close&id='.$ID_TM.'&id_foro='. $_GET['id_foro'] .'&estado=1">ABRIR</a>
+      </div>';
   }
+
+
+if ($permisos_o_dueno) {
+  // code...
+
+  if ($tema['estado'] == 1) {//si el usuaro esta logeado y tiene los permisos 1 0 2  de admin - O - si es el creador del tema.
+    //PUEDE CERRAR EL TEMA
+    echo '
+      <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
+         <a class="mbr-buttons__btn btn btn-danger" href="?view=temas&mode=close&id='.$ID_TM.'&id_foro='. $_GET['id_foro'] .'&estado=0">CERRAR</a>
+      </div>';
+    }
+
+
+    echo '
+      <div class="mbr-avbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons">
+         <a class="mbr-buttons__btn btn btn-danger" href="?view=temas&mode=delete&id='.$ID_TM.'&id_foro='. $_GET['id_foro'] .'">BORRAR</a>
+      </div>';
+
+}
+
+
+
+}
+
+
+
 ?>
 
 
 <!-- breadcrumb    -->
+<?php
+$ID_f= UrlAmigable(intval($_foros[$id_foro]['id']),$_foros[$id_foro]['nombre']);
+$ID_t= UrlAmigable(intval($tema['id']),$tema['titulo'],intval($_foros[$id_foro]['id']));
+?>
 
 <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="?view=index"><i class="fa fa-home"></i> Inicio</a></li>
   <li class="breadcrumb-item"><a href="?view=forum"><i class="fa fa-home"></i> Foros</a></li>
-
+  <li class="breadcrumb-item"><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']; ?></a></li>
+    <li class="breadcrumb-item"><a href="temas/<?php echo $ID_t; ?>"><?php echo $tema['titulo']; ?></a></li>
 </ol>
 <!-- fin breadcrumb -->
 
@@ -47,9 +89,24 @@ if (isset($_SESSION['app_id'])) {
 
   <tr>
     <th colspan="5" scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
+
       <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">
         Tema : <?php echo $tema['titulo']; ?>
+
+        <?php
+        if (isset($_SESSION['app_id'])) {
+          // si el usuario esta conectado
+      if ($permisos_o_dueno) {
+        // Si es el dueño del tema o admin- moderador PODRA editar el tema
+        echo '<a class ="btn btn-sm" style="align:right;"href="index.php?view=temas&mode=edit&id='.$_GET['id'].'&id_foro='.$_GET['id_foro'].'">[EDITAR]</a>';
+      }
+
+    }?>
+
       </div>
+
+
+
     </th>
   </tr>
 </table>
@@ -59,7 +116,11 @@ if (isset($_SESSION['app_id'])) {
     <th width="30%" scope="col"><img src="<?php echo USER_PH_PERF_DIR . $_users[$tema['id_dueno']]['img_perfil']; ?>" alt="FOTO PERFIL" /></th>
     <th width="70%" rowspan="4"  scope="col">
 
-      <?php echo BBcode($tema['contenido']); ?></th>
+      <?php echo BBcode($tema['contenido']); ?>
+
+
+
+    </th>
   </tr>
   <tr>
     <th scope="row"><br/>Nombre: <?php echo $_users[$tema['id_dueno']]['user']; ?>
@@ -111,6 +172,10 @@ echo'
    <img src="'. USER_PH_PERF_DIR . $_users[$tema['id_dueno']]['img_perfil'].'" alt="FOTO PERFIL" />
    </th>
    <th width="70%" rowspan="4"  scope="col">
+
+   <div align="right">
+    <a href="#">[EDITAR]</a>
+   </div>
 
      EJEMPLO CONTENIDO</th>
  </tr>

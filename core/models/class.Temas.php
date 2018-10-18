@@ -93,7 +93,7 @@ VALUES ('$this->titulo','$POST','$this->id_foro','$this->id_dueno','$fecha','$th
 $ID_TEMA= $this->db->insert_id;
 
 //actualizar el foro y sumarle un tema y un mensaje
-$this->db->query("UPDATE foros SET cantidad_temas=cantidad_temas + '1', cantidad_mensajes=cantidad_mensajes + '1', ultimo_tema='$this->titulo', id_ultimo_tema='$ID_TEMA'  WHERE id='$this->id_foro';");
+$this->db->query("UPDATE foros SET cantidad_temas=cantidad_temas + '1', cantidad_mensajes=cantidad_mensajes + '1', ultimo_tema='$this->titulo', id_ultimo_tema='$ID_TEMA'  WHERE id='$this->id_foro' LIMIT 1;");
 //Redirecciona al nuevo post (tema)
 header('location: temas/' . UrlAmigable($ID_TEMA,$this->titulo,$this->id_foro));//$this->db->insert_id   nos devolvera la ultima id que fue insetada
   }#
@@ -102,25 +102,23 @@ header('location: temas/' . UrlAmigable($ID_TEMA,$this->titulo,$this->id_foro));
 //EDIT
   public function Edit(){
 $this->Errors('?view=temas&mode=edit&id='.$this->id.'&id_foro='.$this->id_foro.'&error=');
-
+$this->db->query("UPDATE temas SET titulo='$this->titulo',contenido='$this->content',tipo='$this->anuncio'  WHERE id='$this->id' LIMIT 1;");
+header('location: temas/' . UrlAmigable($this->id,$this->titulo,$this->id_foro));//regresamos al tema despues de editarlo
   }#
 
 //DELETE
   public function Delete(){
-$this->Errors('');
 
+    $this->db->query("DELETE FROM temas WHERE id='$this->id' LIMIT 1;");
+    header('location: index.php?view=foros&id='. $this->id_foro);
   }#
 
 
 //Cerrar tema
-  public function Close(){
-$this->Errors('');
-
-  }#
-
-//Crear un tema ANUNCIO
-  public function Anuncio(){
-$this->Errors('');
+  public function Close(int $estado){//(int $estado) con estos habilitamos la misma funcion tanto para abrir como para cerrar el tema
+    $estado = intval($estado);
+  $this->db->query("UPDATE temas SET estado='$estado' WHERE id='$this->id' LIMIT 1;");
+  header('location: index.php?view=temas&id='.$this->id.'&id_foro='. $this->id_foro);
 
   }#
 

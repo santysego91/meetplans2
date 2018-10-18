@@ -1,6 +1,6 @@
 <?php include(HTML_DIR . 'overall/header.php'); ?>
 <body>
-<section class="engine"><a rel="nofollow" href="#"><?php echo APP_TITLE. '- Crear tema' ?> </a></section>
+<section class="engine"><a rel="nofollow" href="#"><?php echo APP_TITLE. '- Editar tema' ?> </a></section>
  <!-- ENLACES -->
 <?php include(HTML_DIR . 'overall/topnav.php'); ?>
 
@@ -51,12 +51,16 @@
   <!-- breadcrumb -->
   <?php
   $ID_f= UrlAmigable(intval($_foros[$id_foro]['id']),$_foros[$id_foro]['nombre']);
+  $ID_t= UrlAmigable(intval($tema['id']),$tema['titulo'],intval($_foros[$id_foro]['id']));
   ?>
+
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=index">Inicio</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=forum">Foros</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']?></a></li>
-    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=temas&mode=add&id_foro=<?php echo $id_foro ?>">Crear Tema</a></li>
+    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="temas/<?php echo $ID_t; ?>"><?php echo $tema['titulo']; ?></a></li>
+    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="index.php?view=temas&mode=edit&id=<?php echo intval($tema['id']); ?>&id_foro=<?php echo $id_foro ?>">Editar Tema</a></li>
+
   </ol>
   <!-- fin breadcrumb -->
 
@@ -66,7 +70,7 @@
    <tr>
      <th scope="col" bgcolor="#CCCCCC" style="margin-bottom:5px; height:32px;" >
        <div align="left" style="margin-left:15px; margin-top:15px; margin-bottom:15px;">
-         Crear tema en: <?php echo $_foros[$id_foro]['nombre']?></div></th>
+         Editar tema: <?php echo $tema['titulo']?></div></th>
    </tr>
  </table> <br /> <br />
   <!-- encabezado tabla -->
@@ -75,7 +79,7 @@
 
 
     <table width="100%" border="0" cellspacing="5" cellpadding="5">
-      <form class="form-horizontal" action="?view=temas&mode=add&id_foro=<?php echo $id_foro; ?>" method="POST" enctype="application/x-www-form-urlencoded"><!--muy importante el enctype  -->
+      <form class="form-horizontal" action="?view=temas&mode=edit&id_foro=<?php echo $id_foro; ?>&id=<?php echo $_GET['id']; ?>" method="POST" enctype="application/x-www-form-urlencoded"><!--muy importante el enctype  -->
       <fieldset>
 
       <tr>
@@ -88,7 +92,7 @@
 
         <th colspan="2">
 
-          <input type="text" class="form-control" maxlength="250" name="titulo" placeholder="Nombre para el tema"/><!--SE LE LLAMO name="nombre" PORQUE EN class.temas.php se le llamo asi empty($_POST['nombre'])   -->
+          <input type="text" class="form-control" maxlength="250" name="titulo" placeholder="Nombre para el tema" value="<?php echo $tema['titulo']; ?>"/><!--SE LE LLAMO name="nombre" PORQUE EN class.temas.php se le llamo asi empty($_POST['nombre'])   -->
         </th>
 
       </tr>
@@ -132,17 +136,18 @@
         </th>
         <td colspan="2" align="center" >
 <br />
-<textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu tema.."></textarea>
+<textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu tema.."><?php echo $tema['contenido']; ?></textarea>
 <br />
 
 <?php
 if ($_users[$_SESSION['app_id']]['permiso'] > 0) {
   // si el usuario tiene el permiso 1 o 2
+  $cheked = $tema['tipo'] == 2 ? 'checked' : '';//esto es un if compacto que comprueba el estado del input
   echo '
   <div style="float: right;">
     <label class="control-label">
-      Crear tema como anuncio:
-      <input type="checkbox" value="2" name="anuncio"></input>
+      Tema como anuncio:
+      <input type="checkbox" value="2" name="anuncio" '. $cheked .'/>
     </label></div>
   ';
 }
@@ -158,7 +163,7 @@ if ($_users[$_SESSION['app_id']]['permiso'] > 0) {
         <td width="" align="right" valign="middle">
       <br/>
               <button type="reset" class="btn btn-default">RESETEAR</button>
-              <button type="submit" class="btn btn-primary">AÑADIR</button>
+              <button type="submit" class="btn btn-primary">EDITAR</button>
 
         </td>
       </tr>

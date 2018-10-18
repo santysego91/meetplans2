@@ -1,6 +1,6 @@
 <?php
 //PENDIENTES
-/*
+/*1- 
 3- Hacer que no se puedan borrar todos los usuarios. (Siempre tiene que quedar el admin general)
 */
 
