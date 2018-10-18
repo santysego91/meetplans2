@@ -130,6 +130,7 @@ if (isset($_GET['id_foro']) and array_key_exists($_GET['id_foro'],$_foros)) {
           $tema = $temas->Check();
           if (false != $tema) {
             // SI EXISTE - mostrar el controlador vista del post
+            IncrementarVisitas($_GET['id']);//le pasamos a la funcion del tema el id
           include(HTML_DIR . 'forum/temas/ver_temas.php');
           } else {
             header('location: index.php?view=forum');

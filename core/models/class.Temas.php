@@ -10,6 +10,7 @@ class Temas{
   private $content;
   private $id_foro;
   private $id_dueno;
+  private $anuncio;
   //*********************************
   // __CONSTRUCT
   //*********************************
@@ -54,6 +55,17 @@ if (strlen($this->content) < FOROS_CONT_LONG_MIN) {
 throw new Exception(3);
 }
 
+//Verificar si el ususario tiene los permisos necesarios de admin o moderador
+// le indicamos que solo podamos aceptar el valor 1 (para evitar error si alguien manda peticiones que no queremos)
+// 2 es el valor que tenemos declarado en el input de la vista add_temas.php
+if (isset($_POST['anuncio']) and $_POST['anuncio'] == 2){
+  //si el valor anuncio esta definido le pasamos el VALOR
+  $this->anuncio= 2;
+}else {
+  //si no esta definido el valor de anuncio (refiriendose a la vista de add_temas.php)
+  $this->anuncio= 1;
+}
+
 
     } catch (\Exception $error) {
       header('location: ' . $url . $error->getMessage());
@@ -74,8 +86,8 @@ $fecha = date(FOROS_FORMAT_DATE_HR, time());
 //pasar el contenido del tema o post a BBcode
 $POST=BBcode($this->content);
 
-$this->db->query("INSERT INTO temas (titulo,contenido,id_foro,id_dueno,fecha,id_ultimo,fecha_ultimo)
-VALUES ('$this->titulo','$POST','$this->id_foro','$this->id_dueno','$fecha','$this->id_dueno','$fecha');");//PRIMERO PARAMETROS LUEGO VALORES
+$this->db->query("INSERT INTO temas (titulo,contenido,id_foro,id_dueno,fecha,id_ultimo,fecha_ultimo,tipo)
+VALUES ('$this->titulo','$POST','$this->id_foro','$this->id_dueno','$fecha','$this->id_dueno','$fecha','$this->anuncio');");//PRIMERO PARAMETROS LUEGO VALORES
 
 //almacenamos el valor del ID del post para usarla luego
 $ID_TEMA= $this->db->insert_id;

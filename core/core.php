@@ -43,7 +43,7 @@ require('core/bin/functions/UrlAmigable.php');#Archivo que obtiene toda la info 
 require('core/bin/functions/BBcode.php');#Funcion para el foro BBCODE
 require('core/bin/functions/OnlineUsers.php');#Funcion que actualiza cada X segundos los usuarios conectados
 require('core/bin/functions/GetUserStatus.php');#Indica el icono del estado de coneccion del usuario
-
+require('core/bin/functions/IncrementarVisitas.php');#Funcion para incrementar visitas por parametro id
 
 
 

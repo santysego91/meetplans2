@@ -133,6 +133,24 @@
         <td colspan="2" align="center" >
 <br />
 <textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu tema.."></textarea>
+<br />
+
+<?php
+if ($_users[$_SESSION['app_id']]['permiso'] > 0) {
+  // si el usuario tiene el permiso 1 o 2
+  echo '
+  <div style="float: right;">
+    <label class="control-label">
+      Crear tema como anuncio:
+      <input type="checkbox" value="2" name="anuncio"></input>
+    </label></div>
+  ';
+}
+?>
+
+
+
+
       </td>
       </tr>
       <tr>
