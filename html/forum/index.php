@@ -155,14 +155,12 @@ if ($prepare_sql->num_rows > 0) {
 
 } else {
   // NO HAY FOROS
-if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
+
   echo '
 
   <!-- pag -->
   <tr>
-  <th width="90%" scope="row"><div align="center">
-  Para crear un foro ve a <a class="mbr-buttons__btn btn btn-danger" href="?view=configforos&mode=add">CREAR FORO</a>
-   </div></th>
+  <th width="90%" scope="row"><div align="center">Para crear un foro ve a <a class="mbr-buttons__btn btn btn-danger" href="?view=configforos&mode=add">CREAR FORO</a> </div></th>
 
  </tr>
  <tr>
@@ -170,7 +168,6 @@ if(isset($_SESSION['app_id']) and $_users[$_SESSION['app_id']]['permiso'] >= 2){
  </tr>
  <!-- pag -->
   ';
-  }
 }
 //final tabla de diseño foros
 echo '

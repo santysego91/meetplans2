@@ -10,7 +10,6 @@ class Temas{
   private $content;
   private $id_foro;
   private $id_dueno;
-  private $anuncio;
   //*********************************
   // __CONSTRUCT
   //*********************************
@@ -55,17 +54,6 @@ if (strlen($this->content) < FOROS_CONT_LONG_MIN) {
 throw new Exception(3);
 }
 
-//Verificar si el ususario tiene los permisos necesarios de admin o moderador
-// le indicamos que solo podamos aceptar el valor 1 (para evitar error si alguien manda peticiones que no queremos)
-// 2 es el valor que tenemos declarado en el input de la vista add_temas.php
-if (isset($_POST['anuncio']) and $_POST['anuncio'] == 2){
-  //si el valor anuncio esta definido le pasamos el VALOR
-  $this->anuncio= 2;
-}else {
-  //si no esta definido el valor de anuncio (refiriendose a la vista de add_temas.php)
-  $this->anuncio= 1;
-}
-
 
     } catch (\Exception $error) {
       header('location: ' . $url . $error->getMessage());
@@ -86,14 +74,14 @@ $fecha = date(FOROS_FORMAT_DATE_HR, time());
 //pasar el contenido del tema o post a BBcode
 $POST=BBcode($this->content);
 
-$this->db->query("INSERT INTO temas (titulo,contenido,id_foro,id_dueno,fecha,id_ultimo,fecha_ultimo,tipo)
-VALUES ('$this->titulo','$POST','$this->id_foro','$this->id_dueno','$fecha','$this->id_dueno','$fecha','$this->anuncio');");//PRIMERO PARAMETROS LUEGO VALORES
+$this->db->query("INSERT INTO temas (titulo,contenido,id_foro,id_dueno,fecha,id_ultimo,fecha_ultimo)
+VALUES ('$this->titulo','$POST','$this->id_foro','$this->id_dueno','$fecha','$this->id_dueno','$fecha');");//PRIMERO PARAMETROS LUEGO VALORES
 
 //almacenamos el valor del ID del post para usarla luego
 $ID_TEMA= $this->db->insert_id;
 
 //actualizar el foro y sumarle un tema y un mensaje
-$this->db->query("UPDATE foros SET cantidad_temas=cantidad_temas + '1', cantidad_mensajes=cantidad_mensajes + '1', ultimo_tema='$this->titulo', id_ultimo_tema='$ID_TEMA'  WHERE id='$this->id_foro' LIMIT 1;");
+$this->db->query("UPDATE foros SET cantidad_temas=cantidad_temas + '1', cantidad_mensajes=cantidad_mensajes + '1', ultimo_tema='$this->titulo', id_ultimo_tema='$ID_TEMA'  WHERE id='$this->id_foro';");
 //Redirecciona al nuevo post (tema)
 header('location: temas/' . UrlAmigable($ID_TEMA,$this->titulo,$this->id_foro));//$this->db->insert_id   nos devolvera la ultima id que fue insetada
   }#
@@ -102,23 +90,25 @@ header('location: temas/' . UrlAmigable($ID_TEMA,$this->titulo,$this->id_foro));
 //EDIT
   public function Edit(){
 $this->Errors('?view=temas&mode=edit&id='.$this->id.'&id_foro='.$this->id_foro.'&error=');
-$this->db->query("UPDATE temas SET titulo='$this->titulo',contenido='$this->content',tipo='$this->anuncio'  WHERE id='$this->id' LIMIT 1;");
-header('location: temas/' . UrlAmigable($this->id,$this->titulo,$this->id_foro));//regresamos al tema despues de editarlo
+
   }#
 
 //DELETE
   public function Delete(){
+$this->Errors('');
 
-    $this->db->query("DELETE FROM temas WHERE id='$this->id' LIMIT 1;");
-    header('location: index.php?view=foros&id='. $this->id_foro);
   }#
 
 
 //Cerrar tema
-  public function Close(int $estado){//(int $estado) con estos habilitamos la misma funcion tanto para abrir como para cerrar el tema
-    $estado = intval($estado);
-  $this->db->query("UPDATE temas SET estado='$estado' WHERE id='$this->id' LIMIT 1;");
-  header('location: index.php?view=temas&id='.$this->id.'&id_foro='. $this->id_foro);
+  public function Close(){
+$this->Errors('');
+
+  }#
+
+//Crear un tema ANUNCIO
+  public function Anuncio(){
+$this->Errors('');
 
   }#
 

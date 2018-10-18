@@ -55,7 +55,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=index">Inicio</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=forum">Foros</a></li>
-    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']?></a></li>
+    <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="foros/<?php echo $ID_f; ?>"><?php echo $_foros[$id_foro]['nombre']?>o</a></li>
     <li class="breadcrumb-item"><i class="fa fa-comments"></i><a href="?view=temas&mode=add&id_foro=<?php echo $id_foro ?>">Crear Tema</a></li>
   </ol>
   <!-- fin breadcrumb -->
@@ -133,24 +133,6 @@
         <td colspan="2" align="center" >
 <br />
 <textarea class="form-control estilotextarea" style="height:350px;" name="content" placeholder="Contenido de tu tema.."></textarea>
-<br />
-
-<?php
-if ($_users[$_SESSION['app_id']]['permiso'] > 0) {
-  // si el usuario tiene el permiso 1 o 2
-  echo '
-  <div style="float: right;">
-    <label class="control-label">
-      Crear tema como anuncio:
-      <input type="checkbox" value="2" name="anuncio"></input>
-    </label></div>
-  ';
-}
-?>
-
-
-
-
       </td>
       </tr>
       <tr>
